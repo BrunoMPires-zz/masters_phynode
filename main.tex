@@ -1,5 +1,66 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{multirow}
 \begin{document}
-(Type your content here.)
+\title{Teste}
+\author{Bruno Monteiro Pires}
+\maketitle
+\clearpage
+
+\section{Introdução}
+
+
+
+\section{Radio Parameters}
+CC2520
+\begin{itemize}
+\item EIRP = -13 ~ 10
+\item CHANNEL = 2405 ~2505 [16]
+\end{itemize}
+CC1201
+\begin{itemize}
+\item EIRP = -37 ~ 17
+\item CHANNEL = 410 ~ 475 [14]
+\item SYMBOL RATE
+\item MODULATION
+\end{itemize}
+Common
+\begin{itemize}
+\item Packet length
+\item Packet interval
+\end{itemize}
+Output parameters
+\begin{itemize}
+\item RSSI
+\item LQI
+\item CRC\_OK
+\end{itemize}
+
+\subsection{IEEE 802.15.4 compliant operating modes}
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Page}      & \textbf{Channels}          & \textbf{Frequency Band} & \textbf{Modulation}  & \textbf{Data Rate} \\ \hline
+0                  & 11$\sim$26 (1$\sim$20)     & 2450MHz                 & O-QPSK               & 250Kb/s            \\ \hline
+1                  & 1$\sim$10  (1;7$\sim$10)   & 915MHz                  & ASK                  & 250Kb/s            \\ \hline
+\multirow{3}{*}{7} & \multirow{3}{*}{0$\sim$14} & \multirow{3}{*}{433MHz} & \multirow{3}{*}{MSK} & 250Kb/s            \\ \cline{5-5} 
+                   &                            &                         &                      & 100Kb/s            \\ \cline{5-5} 
+                   &                            &                         &                      & 31.25Kb/s          \\ \hline
+9                  & 0$\sim$128 (0$\sim$26;64$\sim$128)   & 915MHz        & 2-FSK (g)            & 50Kb/s             \\ \hline
+\end{tabular}
+\caption{Modos de operação suportados}
+\label{my-label}
+\end{table}
+
+\clearpage
+\section{Procedimentos de teste}
+\subsection{Controle/Referência}
+\textbf{Objetivo:} Realizar as medições de RSSI Médio, LQI Médio e contagem de perda de pacotes, pacotes danificados e simetria da conexão, em condições próximas à ideal. Sendo utilizados dois nodos posocionados a cerca de 1 metro de distância.
+
+O emissor coletará dados referentes à quantiade de pacotes enviados, quantidade de AKC's recebidos e o RSSI e o LQI médio durante a recepção dos ACK's, assim como a quantidade de erros de CRC e RX TImeouts.
+\clearpage
+\section{Introdução}
+
+
 \end{document}

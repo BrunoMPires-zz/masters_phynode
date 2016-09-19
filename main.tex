@@ -15,8 +15,7 @@
 	Dispositivos compatíveis devem implementar por completo ao menos um PHY, podendo opcionalmente ser compatíveis com múltiplos PHYs. A seleção dos PHYs a serem utilizados, no entanto, fica a cargo das regulamentações locais e preferências do usuário. Em sua última versão, IEEE 802.15.4-2015 \cite{7460875}, há dezenove PHYs, capazes de operar em bandas de frequência que variam entre 169 MHz e cerca de 9 GHz. A grande diversidade de  implementações prevista pela norma faz com que frequentemente as legislações vigentes em cada país sejam compatíveis, simultaneamente, com diversas delas.
 	
 	Dado que a utilização de diferentes modulações, ou bandas de frequência, resulta, de acordo com as condições do ambiente, em alterações na qualidade dos links de rádio \cite{bibid}, considera-se que seja possível explorar a diversificação de interfaces admitida pela norma a fim de otimizar a performance de links de comunicação. No caso de dispositivos dotados de múltiplas interfaces, uma forma através da qual este objetivo pode ser alcançado é utilizando um algoritmo de seleção dinâmica, capaz de eleger a interface mais adequada, a cada momento, para a transferência dos dados. Com este objetivo, nas seções seguintes, será proposta a arquitetura batizada de PhyNode, dotada de três interfaces IEEE 802.15.4, operando nas bandas de frequência de 433 MHz, 915 MHz e 2450 MHz. Selecionadas a fim de satisfazer as exigências da regulamentação local, de acordo com a resolução nº 452 da ANATEL \cite{bibid} e a fim de prover a maior amplitude espectral possível.
-	
-\clearpage
+
 \section{Diversidade de interfaces}	
 	A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201s \cite{bibid} destinados às bandas de frequência sub-GHz e um CC2520 \cite{bibid}, destinado à banda de 2450 MHz. As configurações disponíveis em cada um destes componentes permitem que, em alguns casos, mais de um PHY seja utilizado através do mesmo \textit{transceiver}, porém  não simultâneamente.
 	
@@ -61,21 +60,20 @@
 		\label{eq:ch2450oqpsk}
 		f_{P9}(C) = 2405 + 5 (C - 11), \forall C \in \{11..26\}
 	\end{equation}
-\clearpage
 
 \section{Avaliação da qualidade dos links}
 	Para que seja possível utilizar um método algorítmico para alternar dinamicamente entre diferentes interfaces é crítico que existam meios para estimar, individualmente, a confiabilidade dos links estabelecidos através de cada uma das interfaces.  
-	Entende-se por confiabilidade do link, a probabilidade de um pacote de dados enviado através do mesmo ser entregue com sucesso a seu destinatário. Quanto maior a probabilidade de entregas bem sucedidas, maior a confiabilidade do link. 
+	Entende-se por confiabilidade do link, a probabilidade de um pacote de dados enviado através do mesmo ser entregue com sucesso a seu destinatário. Quanto maior a probabilidade das transmissões serem bem sucedidas, maior a confiabilidade do link. 
 
-	A princípio é possível averiguar a confiabilidade de um link estabelecendo-se as razões entre o número de pacotes enviados e o número de pacotes recebidos com sucesso. A transmissão de pacotes de confirmação (\textit{acknowledgement}) por parte do receptor pode ser utilizada, neste contexto, para manter a métrica atualizada em ambas as extremidades do link. No entanto esta abordagem tende a permitir altas taxas de perda de pacotes antes de obter estimativas acuradas, além de ser pouco sensível a variações abruptas na qualidade dos links.
+	A princípio é possível averiguar a confiabilidade de um link estabelecendo-se as razões entre o número de pacotes enviados e o número de pacotes recebidos com sucesso. A transmissão de pacotes de confirmação (\textit{acknowledgement}) por parte do receptor pode ser utilizada para manter a métrica atualizada em ambas as extremidades do link. No entanto esta abordagem, por basear-se em estatísticas computadas a partir do histórico de transmissões, tende a permitir altas taxas de perda de pacotes antes de obter resultados acurados, além de ser pouco sensível a variações abruptas na qualidade dos links.
 	
-	A fim de superar certas barreiras impostas por métricas baseadas somente em parâmetros de alto nível, como citado anteriormente, é possível analisar adicionalmente algumas características físicas do link. O LQI (\textit{Link Quality Indicator}), por exemplo, é um parâmetro que deve ser disponibilizado por \textit{transceivers} compatíveis com a IEEE 802.15.4 e representa a correlação entre os símbolos recebidos pelo demodulador e a imagem ideal destes símbolos. É possível ainda utilizar o indicador de intensidade do sinal (RSSI) para compensar o valor obtido para o LQI, ou mesmo para avaliar diretamente o estado do link.
+	A fim de superar certas barreiras impostas por métricas baseadas somente em parâmetros de alto nível, como a citada anteriormente, é possível analisar certos parâmetros físicos do link. A avaliação de parâmetros deste tipo geralmente requer algum suporte em hardware, uma vez que são provenientes de interpretações analógicas do sinal recebido, obtidas antes que este seja digitalizado. O LQI (\textit{Link Quality Indicator}), por exemplo, é um parâmetro disponibilizado por \textit{transceivers} compatíveis com a IEEE 802.15.4 e tem a finalidade de representar a qualidade do sinal recebido quanto à sua distorção em relação a um sinal ideal. Já o RSSI (\textit{Received Signal Strength Indicator}), é um indicador disponibilizado pela maioria dos \textit{transceivers} e fornece uma medida relativa da intensidade do sinal recebido. É possível ainda utilizar o RSSI e o LQI juntamente para obter uma representação mais acurada da qualidade do sinal recebido.
 	
-	A principal vantagem de utilizar parâmetros provenientes da camada física para estimativas de confiabilidade é a possibilidade de identificar links de baixa qualidade antes que estes falhem. Adicionalmente parâmetros desta natureza tendem a ser mais responsivos no caso de variações abruptas nas condições físicas do meio, ou mesmo quanto a presença de interferências externas.
+	A principal vantagem de utilizar parâmetros provenientes da camada física para estimativas de confiabilidade é a possibilidade de identificar links de baixa qualidade antes que estes falhem. Adicionalmente estes parâmetros tendem a responder mais rapidamente a variações abruptas nas condições físicas do meio e na presença de interferências externas, devido a serem computados somente a partir da transmissão em andamento, não dependendo de séries históricas. 
 
 	Adicionalmente, é importante ressaltar que a confiabilidade não é o único parâmetro a ser considerado. A conservação de energia é, frequentemente, um fator de extrema importância para os sistemas baseados na IEEE 802.15.4 e assim sendo deve-se priorizar a utilização das interfaces que apresentem menor consumo. É possível ainda permitir que o algoritmo de seleção controle determinadas configurações dos \textit{transceivers}, a fim de obter maior confiabilidade enquanto otimiza dinamicamente o consumo de energia. A potência de transmissão, por exemplo, é um parâmetro relativamente independente e que exerce grande influência tanto sobre o consumo energético quanto na confiabilidade do link e portanto, idealmente, poderia ser calibrada dinamicamente.
-\clearpage
 
+\clearpage
 \section{Radio Parameters}
 CC2520
 \begin{itemize}

@@ -17,7 +17,7 @@
 	Dado que a utilização de diferentes modulações, ou bandas de frequência, resulta, de acordo com as condições do ambiente, em alterações na qualidade dos links de rádio \cite{bibid}, considera-se que seja possível explorar a diversificação de interfaces admitida pela norma a fim de otimizar a performance de links de comunicação. No caso de dispositivos dotados de múltiplas interfaces, uma forma através da qual este objetivo pode ser alcançado é utilizando um algoritmo de seleção dinâmica, capaz de eleger a interface mais adequada, a cada momento, para a transferência dos dados. Com este objetivo, nas seções seguintes, será proposta a arquitetura batizada de PhyNode, dotada de três interfaces IEEE 802.15.4, operando nas bandas de frequência de 433 MHz, 915 MHz e 2450 MHz. Selecionadas a fim de satisfazer as exigências da regulamentação local, de acordo com a resolução nº 452 da ANATEL \cite{bibid} e a fim de prover a maior amplitude espectral possível.
 
 \section{Diversidade de interfaces}	
-	A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201s \cite{bibid} destinados às bandas de frequência sub-GHz e um CC2520 \cite{bibid}, destinado à banda de 2450 MHz. As configurações disponíveis em cada um destes componentes permitem que, em alguns casos, mais de um PHY seja utilizado através do mesmo \textit{transceiver}, porém  não simultâneamente.
+	A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite{bibid} destinados às bandas de frequência sub-GHz e um CC2520 \cite{bibid}, destinado à banda de 2450 MHz. As configurações disponíveis em cada um destes componentes permitem que, em alguns casos, mais de um PHY seja utilizado através do mesmo \textit{transceiver}, porém  não simultaneamente.
 	
 	A seleção do método de acesso ao meio físico na norma IEEE 802.15.4 é realizada através de um identificador único de 32 bits, composto por um número de página (armazenado nos 5 bits mais altos) e um número de canal (27 bits restantes). Esta arquitetura foi introduzida com o intuito de permitir a declaração de novos PHYs a medida que fossem realizadas novas revisões do protocolo. PhyNode pode utilizar-se deste identificador para carregar as configurações adequadas num \textit{trasnceiver} antes de transmitir um pacote de dados. O conjunto de PHYs IEEE 802.15.4 suportados em PhyNode é apresentado na Tabela \ref{tab:modos_opr}.
 	
@@ -39,8 +39,6 @@
 	
 	Cada PHY define uma modulação específica, taxas de transferência distintas e um certo número de canais para cada banda de frequência suportada. Sendo que cada canal representa uma pequena faixa de frequência dentro do espectro da banda a qual pertence. A quantidade de canais disponíveis em cada PHY pode variar, de acordo com a largura de banda dedicada a cada um deles. As frequências dos canais disponíveis especificamente nos PHYs utilizados pelos módulos PhyNode são  descritas de acordo com as equações (\ref{eq:ch433msk}), (\ref{eq:ch915ask}), (\ref{eq:ch915fsk}) e (\ref{eq:ch2450oqpsk}).
 	
-	Adicionalmente é possível selecionar a potência de transmissão utilizada por cada \textit{trasnceiver}, sendo que o modelo CC1201 é capaz de operar entre -40 DBm e 14 DBm (ou -37 DBm a 17 DBm, considerando-se o uso de antenas com ganho de 3 DBi), já o modelo CC2520 pode operar entre -18 DBm e 5 DBm (ou -13 DBm a 10DBm, considerando-se o uso de antenas com ganho de 5 DBi).
-	
 	\begin{equation}
 		\label{eq:ch433msk}
 		f_{P0}(C) = 433.164 + 0.108\times C, \forall C \in \{0..14\}
@@ -61,6 +59,10 @@
 		f_{P9}(C) = 2405 + 5 (C - 11), \forall C \in \{11..26\}
 	\end{equation}
 
+	Adicionalmente é possível selecionar a potência de transmissão utilizada por cada \textit{trasnceiver}, sendo que o modelo CC1201 é capaz de operar entre -40 DBm e 14 DBm (ou -37 DBm a 17 DBm, considerando-se o uso de antenas com ganho de 3 DBi), já o modelo CC2520 pode operar entre -18 DBm e 5 DBm (ou -13 DBm a 10DBm, considerando-se o uso de antenas com ganho de 5 DBi).
+
+	Também é importante ressaltar que para que se possa estabelecer um link entre dois dispositivos eles devem estar alinhados quanto à diversos parâmetros, com exceção geralmente apenas da potência de transmissão. Para que estes parâmetros possam ser alterados dinamicamente é são requeridos mecanismos de sincronia, responsáveis manter ambas as configurações atualizadas em ambas as extremidades do link.
+
 \section{Avaliação da qualidade dos links}
 	Para que seja possível utilizar um método algorítmico para alternar dinamicamente entre diferentes interfaces é crítico que existam meios para estimar, individualmente, a confiabilidade dos links estabelecidos através de cada uma das interfaces.  
 	Entende-se por confiabilidade do link, a probabilidade de um pacote de dados enviado através do mesmo ser entregue com sucesso a seu destinatário. Quanto maior a probabilidade das transmissões serem bem sucedidas, maior a confiabilidade do link. 
@@ -72,6 +74,8 @@
 	A principal vantagem de utilizar parâmetros provenientes da camada física para estimativas de confiabilidade é a possibilidade de identificar links de baixa qualidade antes que estes falhem. Adicionalmente estes parâmetros tendem a responder mais rapidamente a variações abruptas nas condições físicas do meio e na presença de interferências externas, devido a serem computados somente a partir da transmissão em andamento, não dependendo de séries históricas. 
 
 	Adicionalmente, é importante ressaltar que a confiabilidade não é o único parâmetro a ser considerado. A conservação de energia é, frequentemente, um fator de extrema importância para os sistemas baseados na IEEE 802.15.4 e assim sendo deve-se priorizar a utilização das interfaces que apresentem menor consumo. É possível ainda permitir que o algoritmo de seleção controle determinadas configurações dos \textit{transceivers}, a fim de obter maior confiabilidade enquanto otimiza dinamicamente o consumo de energia. A potência de transmissão, por exemplo, é um parâmetro relativamente independente e que exerce grande influência tanto sobre o consumo energético quanto na confiabilidade do link e portanto, idealmente, poderia ser calibrada dinamicamente.
+
+\subsection{Caracterização das interfaces disponíveis}
 
 \clearpage
 \section{Radio Parameters}
@@ -98,6 +102,12 @@ Output parameters
 	\item LQI
 	\item CRC\_OK
 \end{itemize}
+
+\subsection{Experimentos}
+\subsubsection{title}
+Energy Scan
+Sweep {Perfil, Potência, Canal, Tamanho}
+Sweep {}
 \clearpage
 
 \bibliography{main}

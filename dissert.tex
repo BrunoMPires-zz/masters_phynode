@@ -1,0 +1,626 @@
+%% abtex2-modelo-trabalho-academico.tex, v-1.9.6 laurocesar
+%% Copyright 2012-2016 by abnTeX2 group at http://www.abntex.net.br/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-trabalho-academico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
+%  abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
+%  mestrado e trabalhos monograficos em geral) em conformidade com 
+%  ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+%  Apresentacao
+% -------------------------------------------------------------------------
+% -------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	%twoside,			% para impressão em recto e verso. Oposto a oneside
+	oneside,
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{multirow}
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Seleção dinâmica de interface em redes \\ IEEE 802.15.4}
+\autor{Bruno Monteiro Pires}
+\local{Rio Claro}
+\data{2016}
+\orientador{Alexandro José Baldassin}
+\coorientador{Alex Roschildt Pinto}
+\instituicao{
+  Universidade Estadual Paulista -- UNESP
+  \par
+  Instituto de Biociências, Letras e Ciências Exatas
+  \par
+  Programa de Pós-Graduação em Ciência da Computação}
+\tipotrabalho{Dissertação (Mestrado)}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+% ---
+% TODO - Preambulo
+% ---
+\preambulo{Dissertação de Mestrado elaborada junto ao Programa
+	de Pós-Graduação em Ciência da Computação – Área
+	de Concentração em Arquitetura de Computadores e
+	Sistemas Distribuídos, como parte dos requisitos para
+	obtenção do título de Mestre em Ciência da Computação.
+}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      	% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+\begin{fichacatalografica}
+	\sffamily
+	\vspace*{\fill}					% Posição vertical
+	\begin{center}					% Minipage Centralizado
+	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+	\small
+	\imprimirautor
+	%Sobrenome, Nome do autor
+	
+	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+	\imprimirlocal, \imprimirdata-
+	
+	\hspace{0.5cm} \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\\
+	
+	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+	
+	\hspace{0.5cm}
+	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+	\imprimirdata.}\\
+	
+	\hspace{0.5cm}
+		1. IEEE802.15.4.
+		I. Alexandro José Baldassin.
+		II. Universidade Estadual Paulista.
+		III. Instituto de Biociências, Letras e Ciências Exatas.
+		IV. Seleção dinâmica de interface em redes IEEE 802.15.4
+	\end{minipage}}
+	\end{center}
+\end{fichacatalografica}
+% ---
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+   Trabalho aprovado. \imprimirlocal, 22 de dezembro de 2016:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{Professor} \\ Convidado 1}
+   \assinatura{\textbf{Professor} \\ Convidado 2}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{ Este trabalho é dedicado às crianças adultas que,\\
+   quando pequenas, sonharam em se tornar cientistas.} \vspace*{\fill}
+\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\begin{agradecimentos}
+Os agradecimentos principais são direcionados à Gerald Weber, Miguel Frasson,
+Leslie H. Watter, Bruno Parente Lima, Flávio de Vasconcellos Corrêa, Otavio Real
+Salvador, Renato Machnievscz\footnote{Os nomes dos integrantes do primeiro
+projeto abn\TeX\ foram extraídos de
+\url{http://codigolivre.org.br/projects/abntex/}} e todos aqueles que
+contribuíram para que a produção de trabalhos acadêmicos conforme
+as normas ABNT com \LaTeX\ fosse possível.
+
+Agradecimentos especiais são direcionados ao Centro de Pesquisa em Arquitetura
+da Informação\footnote{\url{http://www.cpai.unb.br/}} da Universidade de
+Brasília (CPAI), ao grupo de usuários
+\emph{latex-br}\footnote{\url{http://groups.google.com/group/latex-br}} e aos
+novos voluntários do grupo
+\emph{\abnTeX}\footnote{\url{http://groups.google.com/group/abntex2} e
+\url{http://www.abntex.net.br/}}~que contribuíram e que ainda
+contribuirão para a evolução do \abnTeX.
+
+\end{agradecimentos}
+% ---
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+%\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+%\begin{resumo}
+% Segundo a \citeonline[3.1-3.2]{NBR6028:2003}, o resumo deve ressaltar o
+% objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+% destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+% tratamento que cada item recebe no documento original. O resumo deve ser
+% precedido da referência do documento, com exceção do resumo inserido no
+% próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+% resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+% ponto e finalizadas também por ponto.
+
+% \textbf{Palavras-chave}: latex. abntex. editoração de texto.
+%\end{resumo}
+
+% resumo em inglês
+%\begin{resumo}[Abstract]
+% \begin{otherlanguage*}{english}
+%   This is the english abstract.
+
+%   \vspace{\onelineskip}
+ 
+%   \noindent 
+%   \textbf{Keywords}: latex. abntex. text editoration.
+% \end{otherlanguage*}
+%\end{resumo}
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+%\begin{siglas}
+%  \item[ABNT] Associação Brasileira de Normas Técnicas
+%  \item[abnTeX] ABsurdas Normas para TeX
+%\end{siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+%\begin{simbolos}
+%  \item[$ \Gamma $] Letra grega Gama
+%  \item[$ \Lambda $] Lambda
+%  \item[$ \zeta $] Letra grega minúscula zeta
+%  \item[$ \in $] Pertence
+%\end{simbolos}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\chapter[Introdução]{Introdução}
+Redes de sensores sem fios têm, desde seu surgimento, possibilitado o monitoramento dos mais diversos fenômenos e processos, além de abrir caminho para a criação de uma nova geração de sistemas inteligentes, dinâmicos e conectados. Historicamente esforços visionários como Igloo White \cite{Warneke2001} e Smart Dust \cite{Correl2004} demonstraram o potencial desta tecnologia. No entanto, até o momento, são escassas as iniciativas realizadas em direção à criação de padrões e plataformas de uso geral.
+
+A diversidade das aplicações as quais se destinam as redes de sensores sem fios impõe restrições no projeto e na implantação destes sistemas, o que favorece iniciativas de desenvolvimento orientadas à aplicação. Embora esta abordagem leve a criação de soluções eficazes para aplicações específicas, estabelece um padrão de desenvolvimento restrito e desconsidera possibilidades de otimização mais abrangentes. Além de inibir eventuais reduções de custo resultantes da produção em massa e difusão da tecnologia \cite{Rawat2014}. 
+
+É plausível supor que dentre as motivações para adoção generalizada deste modelo de desenvolvimento esteja o início das pesquisas na área ter ocorrido antes de as tecnologias que a viabilizam estarem totalmente desenvolvidas. Tal consideração fica evidente quando se observa, por exemplo, a história de Igloo White. Uma operação militar responsável por operar o que talvez tenha sido a primeira utilização documentada de uma rede de sensores sem fios, sendo composta por unidades de monitoramento implantadas nos campos de batalha durante a guerra do Vietnã. Na época foi necessário que cada um de seus componentes fosse desenvolvido sob medida, assim como a infraestrutura necessária para coleta e posterior processamento dos dados obtidos. Isso fez com que a operação demandasse uma quantidade exorbitante de recursos, sendo sua execução assegurada somente após substanciais investimentos do departamento de defesa dos Estados Unidos.
+
+Efetivamente já existiam diversas motivações para o desenvolvimento de redes de sensores sem fios e sistemas de informação similares mesmo antes que as tecnologias disponíveis permitissem implementações viáveis, tanto técnica quanto financeiramente. Por este motivo esta área sempre foi muito beneficiada pelos avanços realizados no campo da microeletrônica de baixa potência, que vem acontecendo de forma regular há várias décadas. Isso faz com que, frequentemente, barreiras técnicas sejam quebradas, alterando paradigmas de projeto e abrindo caminho para exploração de novas possibilidades. Sendo esta provavelmente uma das razões pela qual este tema continua recebendo tanta atenção atualmente, apesar das pesquisas na área terem começado a se intensificar no início dos anos 2000 \cite{Kahn2000, Pottie2000, Heinzelman2000}, quase duas décadas atrás.
+
+Inicialmente os sistemas 
+
+
+
+
+% ---
+
+%A disseminação de soluções tecnológicas baseadas no conceito de Internet das Coisas promoveu a %proliferação de dispositivos interconectados e de baixa potência.
+Neste contexo, a comunicação via radiofrequência é frequentemente utilizada. Para que seja possível estabelecer links de rádio confiáveis entre dispositivos deste tipo são necessários protocolos e hardware especialmente desenvolvidos, destinados a lidar com situações de instabilidade e capazes promover máxima eficiência energética.
+
+Dado que a utilização de diferentes modulações, ou bandas de frequência, resulta, de acordo com as condições do ambiente, em alterações na qualidade dos links de rádio \cite{bibid}, considera-se que seja possível explorar a diversificação de interfaces admitida pela norma a fim de otimizar a performance de links de comunicação. No caso de dispositivos dotados de múltiplas interfaces, uma forma através da qual este objetivo pode ser alcançado é utilizando um algoritmo de seleção dinâmica, capaz de eleger a interface mais adequada, a cada momento, para a transferência dos dados. Com este objetivo, nas seções seguintes, será proposta a arquitetura batizada de PhyNode, dotada de três interfaces IEEE 802.15.4, operando nas bandas de frequência de 433 MHz, 915 MHz e 2450 MHz. Selecionadas a fim de satisfazer as exigências da regulamentação local, de acordo com a resolução nº 452 da ANATEL \cite{bibid} e a fim de prover a maior amplitude espectral possível.
+	\section{Objetivos e Motivações}
+% TODO - Objetivos e Motivações
+	\section{Contribuições}
+% TODO - Contribuições
+	\section{Organização do texto}
+% TODO - Organização do texto
+% ---
+
+% ---
+% Fundamentação teórica e trabalhos relacionados
+% ---
+\chapter{Redes de sensores sem fios}
+\cite{Rawat2014}
+
+\chapter{O padrão IEEE 802.15.4}
+A norma IEEE 802.15.4 \cite{IEEE2003}, define um protocolo de comunicação e parâmetros de implementação da camada física para interconexão de dispositivos via radiofrequência em redes de área pessoal sem fio com baixas taxas de transmissão (LR-WPANs). Esta norma é base para alguns dos protocolos mais disseminados na indústria como ZigBee \cite{bibid}, 6LowPAN \cite{bibid}, WirelessHART \cite{bibid}, MiWi \cite{bibid} entre outros. A norma original, publicada em 2003, propunha apenas duas implementações distintas para a camada física (PHY), sendo a primeira destinada à operação nas bandas de 868 MHz e 915 MHz utilizando modulação BPSK e a segunda na banda de 2450 MHz, através da modulação O-QPSK. Desde sua publicação original, no entanto, esta norma recebeu diversas emendas e revisões, através das quais foram adicionados novos PHYs e realizadas alterações nos protocolos de comunicação. 
+
+Dispositivos compatíveis devem implementar por completo ao menos um PHY, podendo opcionalmente ser compatíveis com múltiplos PHYs. A seleção dos PHYs a serem utilizados, no entanto, fica a cargo das regulamentações locais e preferências do usuário. Em sua última versão, IEEE 802.15.4-2015 \cite{IEEE2016}, há dezenove PHYs, capazes de operar em bandas de frequência que variam entre 169 MHz e cerca de 9 GHz. A grande diversidade de  implementações prevista pela norma faz com que frequentemente as legislações vigentes em cada país sejam compatíveis, simultaneamente, com diversas delas.
+ % ---
+Cada PHY define uma modulação específica, taxas de transferência distintas e um certo número de canais para cada banda de frequência suportada. Sendo que cada canal representa uma pequena faixa de frequência dentro do espectro da banda a qual pertence. A quantidade de canais disponíveis em cada PHY pode variar, de acordo com a largura de banda dedicada a cada um deles. 
+
+A seleção do método de acesso ao meio físico na norma IEEE 802.15.4 é realizada através de um identificador único de 32 bits, composto por um número de página (armazenado nos 5 bits mais altos) e um número de canal (27 bits restantes). Esta arquitetura foi introduzida com o intuito de permitir a declaração de novos PHYs a medida que fossem realizadas novas revisões do protocolo. 
+\chapter{Trabalhos relacionados}
+	\section{Diversidade de interfaces}
+	\section{Estimativa de qualidade dos links}
+% ---
+
+% ---
+% Materiais e Métodos
+% ---
+\chapter{A plataform PhyNode}
+A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite{bibid} destinados às bandas de frequência sub-GHz e um CC2520 \cite{bibid}, destinado à banda de 2450 MHz. As configurações disponíveis em cada um destes componentes permitem que, em alguns casos, mais de um PHY seja utilizado através do mesmo \textit{transceiver}, porém  não simultaneamente.
+	\section{Interfaces de comunicação}
+	PhyNode pode utilizar-se do identificador único de 32bits presente no padrão IEEE 802.15.4 para carregar as configurações adequadas num \textit{trasnceiver} antes de transmitir um pacote de dados. O conjunto de PHYs IEEE 802.15.4 suportados em PhyNode é apresentado na Tabela \ref{tab:modos_opr}.
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|l|l|l|l|l|}
+			\hline
+			\textbf{Página}    & \multicolumn{1}{l|}{\textbf{Canais}}   & \textbf{Banda}          & \textbf{Modulação}   & \textbf{Taxa transf.} \\ \hline
+			0                  & 11$\sim$26                             & 2450MHz                 & O-QPSK               & 250Kb/s               \\ \hline
+			1                  & 1$\sim$10                              & 915MHz                  & ASK                  & 250Kb/s               \\ \hline
+			\multirow{3}{*}{7} & \multirow{3}{*}{0$\sim$14}             & \multirow{3}{*}{433MHz} & \multirow{3}{*}{MSK} & 250Kb/s               \\
+			&                                        &                         &                      & 100Kb/s               \\
+			&                                        &                         &                      & 31.25Kb/s             \\ \hline
+			9                  & 0$\sim$128                             & 915MHz                  & 2-FSK                & 50Kb/s                \\ \hline 
+		\end{tabular}
+		\caption{Modos de operação suportados}
+		\label{tab:modos_opr}
+	\end{table}
+	
+	As frequências dos canais disponíveis especificamente nos PHYs utilizados pelos módulos PhyNode são  descritas de acordo com as equações (\ref{eq:ch433msk}), (\ref{eq:ch915ask}), (\ref{eq:ch915fsk}) e (\ref{eq:ch2450oqpsk}).
+	
+	\begin{equation}
+	\label{eq:ch433msk}
+	f_{P0}(C) = 433.164 + 0.108\times C, \forall C \in \{0..14\}
+	\end{equation}
+	
+	\begin{equation}
+	\label{eq:ch915ask}
+	f_{P1}(C) = 906 + 2 (C - 1), \forall C \in \{1..10\}
+	\end{equation}
+	
+	\begin{equation}
+	\label{eq:ch915fsk}
+	f_{P7}(C) = 902.2 + 0.2 \times C, \forall C \in \{0..128\}
+	\end{equation}
+	
+	\begin{equation}
+	\label{eq:ch2450oqpsk}
+	f_{P9}(C) = 2405 + 5 (C - 11), \forall C \in \{11..26\}
+	\end{equation}
+	
+	Adicionalmente é possível selecionar a potência de transmissão utilizada por cada \textit{trasnceiver}, sendo que o modelo CC1201 é capaz de operar entre -40 DBm e 14 DBm (ou -37 DBm a 17 DBm, considerando-se o uso de antenas com ganho de 3 DBi), já o modelo CC2520 pode operar entre -18 DBm e 5 DBm (ou -13 DBm a 10DBm, considerando-se o uso de antenas com ganho de 5 DBi).
+	
+	Também é importante ressaltar que para que se possa estabelecer um link entre dois dispositivos eles devem estar alinhados quanto à diversos parâmetros, com exceção geralmente apenas da potência de transmissão. Para que estes parâmetros possam ser alterados dinamicamente é são requeridos mecanismos de sincronia, responsáveis manter ambas as configurações atualizadas em ambas as extremidades do link.
+	\section{Parâmetros observáveis}
+	CC2520
+	\begin{itemize}
+		\item EIRP = -13 ~ 10
+		\item CHANNEL = 2405 ~2505 [16]
+	\end{itemize}
+	CC1201
+	\begin{itemize}
+		\item EIRP = -37 ~ 17
+		\item CHANNEL = 410 ~ 475 [14]
+		\item SYMBOL RATE
+		\item MODULATION
+	\end{itemize}
+	Common
+	\begin{itemize}
+		\item Packet length
+		\item Packet interval
+	\end{itemize}
+	Output parameters
+	\begin{itemize}
+		\item RSSI
+		\item LQI
+		\item CRC\_OK
+	\end{itemize}
+\chapter{Caracterização dos links}
+\chapter{Comunicação multi-interface}
+\chapter{Métodos de otimização}
+
+% ---
+% Resultados
+% ---
+\chapter{Avaliação experimental da proposta}
+\chapter{Resultados}
+
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+
+% ---
+% Conclusão
+% ---
+\chapter{Conclusão}
+
+% TODO - Conclusão
+
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{dissert}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+%\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+%\partapendices
+
+% ----------------------------------------------------------
+%\chapter{Quisque libero justo}
+% ----------------------------------------------------------
+
+%\lipsum[50]
+
+%\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+%\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+%\partanexos
+
+% ---
+%\chapter{Morbi ultrices rutrum lorem.}
+% ---
+%\lipsum[30]
+
+%\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}

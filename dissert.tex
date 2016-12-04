@@ -423,19 +423,13 @@ Neste âmbito a obtenção de links de comunicação versáteis e confiáveis é
 
 No entanto a qualidade dos links de rádio sofre influencia de diversas variáveis externas como, por exemplo: interferência gerada por outros equipamentos, alterações na vegetação, objetos se movendo nas proximidades e até mesmo mudanças nas condições climáticas. Logo a eficiência destes links tende a variar ao longo do tempo e de acordo com a localização dos transmissores \cite{Kusy2011}. Protocolos de roteamento modernos são capazes de lidar com estas adversidades detectando alterações na qualidade dos links individuais e estabelecendo rotas alternativas a fim de otimizar o fluxo de dados na rede e garantir maior eficiência energética \cite{Gnawali2009}. No entanto esta abordagem depende do provisionamento de rotas alternativas, requerendo redes mais densas, o que eleva os custos e pode dificultar o processão de implantação.
 
-	\section{Objetivos e Motivações}
-Este trabalho tem como objetivo explorar alternativas para mitigar os problemas de instabilidade inerentes aos links de comunicação via rádio utilizados nas redes de sensores sem fios, a fim de prover soluções alternativas ao adensamento da malha robustas e que não interfiram adequadas aos novos paradigmas de projeto associados a este tipo de sistema. 
+\section{Objetivos e Contribuições}
+Este trabalho tem como objetivo principal explorar alternativas para mitigar os problemas de instabilidade relacionados aos links de rádio nas redes de sensores sem fios. Diversas iniciativas já foram realizadas com este intuito, contudo se trata de um espaço de soluções bastante amplo e diversificado, havendo ainda grande potencial para otimização. A abordagem proposta nas seções seguintes busca utilizar mais intensivamente o hardware e as camadas inferiores dos protocolos de comunicação, a fim de permitir a implementação de plataformas mais flexíveis e robustas, capazes de operar em uma maior gama de situações. 
 
-Devido às restrições na complexidade, no consumo energético e nos custos de produção, os transmissores de rádio utilizados para este fim geralmente operam com baixa potência e pequenas taxas de transmissão. Isso faz com que os links estabelecidos se tornem bastante susceptíveis à variações intermitentes de qualidade, especialmente nos casos em que operam em frequências compartilhadas com outros sistemas, como a faixa de 2.4GHz, compartilhada com tecnologias bem difundidas como WiFi e Bluetooth.
+A fim de validar estas propostas experimentalmente será introduzida, na seção \ref{phynode}, a plataforma PhyNode. A abordagem utilizada em sua construção tem o potencial de contribuir para o estado da arte das pesquisas na área, pois complementa outras soluções já presentes na literatura \cite{Pantazis2013, Tarique2009} e que, em grande parte, são destinadas exclusivamente a ambientes de rede \textit{mesh} densamente populados e redundantes, além de não dedicarem atenção especial às possibilidades proporcionadas pela utilização de hardware especificamente destinado à manutenção de links de comunicação mais robustos.
 
+É interessante que soluções como PhyNode sejam desenvolvidas com o objetivo de incentivar o processo de massificação do uso de sistemas baseados em redes de sensores sem fios. A medida que esta tecnologia é integrada a um número maior de produtos e disponibilizada aos consumidores finais, se torna essencial que seja capaz de operar de forma confiável em diferentes ambientes e com topologias bastante diversificadas. Atualmente a maior parte das redes de sensores sem fios é utilizada em pesquisas científicas, com fins exploratórios, o que permite que cada projeto seja realizado considerando finalidades e ambientes de aplicação específicos. Este paradigma não é adequado para as aplicações comerciais, onde a produção em massa se beneficia de projetos mais flexíveis, que possam ser produzidas em larga escala e sejam capazes de adaptar-se a diferentes aplicações.
 
-
-
-% ---
-
-Dado que a utilização de diferentes modulações, ou bandas de frequência, resulta, de acordo com as condições do ambiente, em alterações na qualidade dos links de rádio \cite{bibid}, considera-se que seja possível explorar a diversificação de interfaces admitida pela norma a fim de otimizar a performance de links de comunicação. No caso de dispositivos dotados de múltiplas interfaces, uma forma através da qual este objetivo pode ser alcançado é utilizando um algoritmo de seleção dinâmica, capaz de eleger a interface mais adequada, a cada momento, para a transferência dos dados. Com este objetivo, nas seções seguintes, será proposta a arquitetura batizada de PhyNode, dotada de três interfaces IEEE 802.15.4, operando nas bandas de frequência de 433 MHz, 915 MHz e 2450 MHz. Selecionadas a fim de satisfazer as exigências da regulamentação local, de acordo com a resolução nº 452 da ANATEL \cite{bibid} e a fim de prover a maior amplitude espectral possível.
-	\section{Contribuições}
-% TODO - Contribuições
 	\section{Organização do texto}
 % TODO - Organização do texto
 % ---
@@ -445,6 +439,8 @@ Dado que a utilização de diferentes modulações, ou bandas de frequência, re
 % ---
 \chapter{Redes de sensores sem fios}
 \cite{Rawat2014}
+
+Devido às restrições na complexidade, no consumo energético e nos custos de produção, os transmissores de rádio utilizados para este fim geralmente operam com baixa potência e pequenas taxas de transmissão. Isso faz com que os links estabelecidos se tornem bastante susceptíveis à variações intermitentes de qualidade, especialmente nos casos em que compartilham sua banda de frequência com outros sistemas mais bem difundidos. Como é o caso da disputada faixa de 2.4GHz, na qual também estão outras tecnologias bem difundidas como WiFi e Bluetooth.
 
 \chapter{O padrão IEEE 802.15.4}
 A norma IEEE 802.15.4 \cite{IEEE2003}, define um protocolo de comunicação e parâmetros de implementação da camada física para interconexão de dispositivos via radiofrequência em redes de área pessoal sem fio com baixas taxas de transmissão (LR-WPANs). Esta norma é base para alguns dos protocolos mais disseminados na indústria como ZigBee \cite{bibid}, 6LowPAN \cite{bibid}, WirelessHART \cite{bibid}, MiWi \cite{bibid} entre outros. A norma original, publicada em 2003, propunha apenas duas implementações distintas para a camada física (PHY), sendo a primeira destinada à operação nas bandas de 868 MHz e 915 MHz utilizando modulação BPSK e a segunda na banda de 2450 MHz, através da modulação O-QPSK. Desde sua publicação original, no entanto, esta norma recebeu diversas emendas e revisões, através das quais foram adicionados novos PHYs e realizadas alterações nos protocolos de comunicação. 
@@ -462,7 +458,12 @@ A seleção do método de acesso ao meio físico na norma IEEE 802.15.4 é reali
 % ---
 % Materiais e Métodos
 % ---
-\chapter{Plataform PhyNode}
+\chapter{Plataform PhyNode} \label{phynode}
+
+Dado que a utilização de diferentes modulações, ou bandas de frequência, resulta, de acordo com as condições do ambiente, em alterações na qualidade dos links de rádio \cite{bibid}, considera-se que seja possível explorar a diversificação de interfaces admitida pela norma a fim de otimizar a performance de links de comunicação. No caso de dispositivos dotados de múltiplas interfaces, uma forma através da qual este objetivo pode ser alcançado é utilizando um algoritmo de seleção dinâmica, capaz de eleger a interface mais adequada, a cada momento, para a transferência dos dados. Com este objetivo, nas seções seguintes, será proposta a arquitetura batizada de PhyNode, dotada de três interfaces IEEE 802.15.4, operando nas bandas de frequência de 433 MHz, 915 MHz e 2450 MHz. Selecionadas a fim de satisfazer as exigências da regulamentação local, de acordo com a resolução nº 452 da ANATEL \cite{bibid} e a fim de prover a maior amplitude espectral possível.
+
+% ---
+
 A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite{bibid} destinados às bandas de frequência sub-GHz e um CC2520 \cite{bibid}, destinado à banda de 2450 MHz. As configurações disponíveis em cada um destes componentes permitem que, em alguns casos, mais de um PHY seja utilizado através do mesmo \textit{transceiver}, porém  não simultaneamente.
 	\section{Interfaces de comunicação}
 	PhyNode pode utilizar-se do identificador único de 32bits presente no padrão IEEE 802.15.4 para carregar as configurações adequadas num \textit{trasnceiver} antes de transmitir um pacote de dados. O conjunto de PHYs IEEE 802.15.4 suportados em PhyNode é apresentado na Tabela \ref{tab:modos_opr}.

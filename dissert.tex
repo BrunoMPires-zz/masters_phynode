@@ -72,6 +72,15 @@
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
+% ---
+% Pacotes para tabelas
+% ---
+
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
+
 % --- 
 % CONFIGURAÇÕES DE PACOTES
 % --- 
@@ -695,8 +704,46 @@ Certos refinamentos introduzidos pela plataforma PhyNode encontram-se no módulo
 	As leituras fornecidas pelo MAX17047 combinam resultados obtidos a partir destes dois algoritmos com fatores de compensação adicionais que dizem respeito a temperatura e ao envelhecimento da bateria. Através deste chip é possível ainda monitorar outros parâmetros do sistema como: consumo instantâneo e o tempo restante para o carregamento ou descarregamento completo da bateria.
 	\item \textit{Conversor DC-DC.} O conversor DC-DC desempenha um papel importante para a eficiência energética do sistema. Todo processo de conversão de voltagem ocorre com eficiência inferior a 100\%, indicando que há um custo relacionado à regulação das linhas de alimentação. Porém, mais que isso: quer dizer que este custo é proporcional ao consumo dos sistemas, e que a eficiência de qualquer componente alimentado pelo conversor também é afetada. Em suma, a eficiência global da plataforma depende da escolha de um sistema de conversão adequado.
 	
-	Este conversores são necessários por que os circuitos 
+	A utilização de conversores DC-DC é necessária pois as voltagens fornecidas por baterias variam de acordo com seu estado de carga, com a intensidade da corrente consumida e até mesmo de acordo com a temperatura. A maioria dos circuitos de baixa potência atuais, por exemplo, atua na faixa de 3.3 volts. Já as baterias de lítio comumente utilizadas para alimentar os nodos de sensores, podem fornecer voltagens que variam entre 4.2 volts, quando totalmente carregadas, a 2.8 volts em seu estado de carga mais baixo.
+	
+	O conversor DC-DC selecionado para equipar os protótipos de PhyNode, Texas Instruments LM3668SD-2883, é capaz de manter a regulação de voltagem de saída em 3.3 volts a partir de toda a faixa de voltagem fornecida pela baterias de lítio que equipam os protótipos. Sendo capaz de reduzir eficientemente a voltagem de entrada quando esta se encontrar acima dos 3.3 volts e elevá-la quando encontrar-se abaixo.
 \end{itemize}
+
+\subsection{Sistema de comunicação}
+
+O maior diferencial da plataforma PhyNode, no entanto, é seu sistema de comunicação, capaz de operar através de múltiplas interfaces de comunicação simultaneamente. A seguir serão apresentados os componentes utilizados neste sistema e serão discutidos os vanços obtidos e as capacidades dos mesmos.
+
+A começar pela escolha dos rádios: o módulo de sistemas da plataforma PhyNode conta com três radiotransmissores operando em frequências distintas e razoavelmente espaçadas, sendo elas 433MHz, 915MHz e 2.4GHz. A escolha destas frequências foi crucial para o processo de desenvolvimento dos protótipos, uma vez que influencia diretamente em alguns aspectos do seu projeto como, por exemplo, restrições legais para operação e licenciamento de bandas, logística para aquisição de \textit{hardware} e outros. Os principais requisitos estabelecidos foram:
+
+\begin{itemize}
+	\item \textit{spalhar o espectro de transmissão tanto quanto possível.} A principal idéia por trás da diversidade de interfaces é implementar dois ou mais links paralelos e independentes, de modo que a probabilidade de todos os links falharem simultaneamente seja pequena. Links independentes podem ser obtidos, por exemplo, utilizando-se faixas de frequência diferentes \cite{Kusy2011}. Quanto maior o espaçamento entre faixas de frequência utilizadas, menor será a dependência entre os links.
+	\item \textit{Utilizar apenas bandas ISM.} As faixas de frequência ISM (\textit{Industrial, Scientific and Medical}) são faixas de frequência internacionalmente disponibilizadas para utilização por aplicações industriais, científicas e médicas. Não necessariamente relacionadas a sistemas de telecomunicação. A utilização destas bandas é preferida por não haver grandes restrições legais quanto à irradiação nas mesmas. No entanto, este benefício leva também à sua maior desvantagem, que é a grande probabilidade de sofrer interferências externas, causadas por outros sistemas operando em frequências similares, notadamente redes WiFi e eletrodomésticos como, por exemplo, fornos micro-ondas \cite{Kusy2011, Srinivasan2008}. O espalhamento espectral ajuda a mitigar este problema.
+	\item \textit{Não impor grandes restrições à construção física dos nodos.} O projeto de placas de circuito capazes de conduzir adequadamente os sinais de alta frequência é em si um grande desafio. Fatores que antes não importavam como, por exemplo, a geometria das trilhas, sua impedância característica e a espessura da placa, devem ser considerados. Ignora-los significaria incorrer em grandes perdas de eficiência ou até mesmo na completa inutilização dos circuitos de transmissão. AS exigências técnicas para obter-se circuitos eficientes são diretamente proporcionais à frequência. Por este motivo frequência superiores a 2.4GHz foram evitadas.
+	\item \textit{Ser compatível com transmissores 802.15.4 eficientes e disponíveis comercialmente.} A eficiência dos links de comunicação depende muito do hardware utilizado. Escolher o transmissor mais adequado é, assim como tantos outros aspectos do projeto de sistemas de hardware e software, uma questão de \textit{co-design} de hardware e software. Porém neste caso limitada pela disponibilidade de produtos comercialmente disponíveis.
+\end{itemize}
+
+\begin{table}[bt]
+	\centering
+	\caption{Comparativo de radiotransmissores}
+	\label{tab_transceivers}
+	\begin{tabular}{|l|l|l|l|l|l|l|}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modelo}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Frequência}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Banda}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modulação}}                    & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{TX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{RX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Potência}} \\ \hline
+		CC1000                                                        & 1 $\sim$ 3 GHz                                                   & 76.8 Kbps                                                   & 2-FSK                                                                              & 18.5 mA                                                  & 9.6 mA                                                   & 10 dBm                                                         \\ \hline
+		nRF903                                                        & 433 / 915 MHz                                                    & 76.8 Kbps                                                   & GFSK                                                                               & 19.5 mA                                                  & 22.5 mA                                                  & 10 dBm                                                         \\ \hline
+		TR1000                                                        & 916 MHz                                                          & 115.1 Kbps                                                  & OOK, ASK                                                                           & 12.0 mA                                                  & 3.8 mA                                                   & 0 dBm                                                          \\ \hline
+		\textbf{CC1201}                                               & ISM Sub 1GHz                                                     & 1.25 Mbps                                                   & \begin{tabular}[c]{@{}l@{}}2-FSK, 2-GFSK,\\ 4-FSK, 4-GFSK,\\ MSK, OOK\end{tabular} & 46.0 mA\footnote{Corrente de pico para frequência de transmissão 915MHz a +14dBm.}                                                  & 8.0 uA\footnote{Corrente média consumida utilizando o sistema eWOR (\textit{enhanced Wake On Radio}) operando a 1Hz.}                                                   & 16 dBm                                                         \\ \hline
+		CC2420                                                        & 2.4 GHz                                                          & 250 Kbps                                                    & DSSS, O-QPSK                                                                       & 17.4 mA                                                  & 19.7 mA                                                  & 0 dBm                                                          \\ \hline
+		CC2500                                                        & 2.4 GHz                                                          & 512 Kbps                                                    & 2-FSK                                                                              & 12.8 mA                                                  & 21.6 mA                                                  & 1 dBm                                                          \\ \hline
+		\textbf{CC2520}                                               & 2.4 GHz                                                          & 250 Kbps                                                    & O-QPSK                                                                             & 33.6 mA                                                  & 18.8 mA                                                  & 5 dBm                                                          \\ \hline
+	\end{tabular}
+	\legend{Fonte: Adaptado de \cite{Baccour2012}}
+\end{table}
+
+Adicionalmente, num sistema dotado de múltiplas interfaces, o ideal é que o formato dos barramentos de comunicação entre as diversas interfaces e a MCU seja o mais uniforme possível \cite{Lymberopoulos2008}. Devido à grande distância entre as faixas de frequência utilizadas nas três interfaces da plataforma PhyNode não foi possível encontrar um único modelo de transmissor que fosse capaz de lidar com todas elas. No entanto foram escolhidos modelos com arquiteturas compatíveis entre si e equipados com interfaces de comunicação semelhantes.
+
+O CC1201, produzido pela Texas Instruments, é um transmissor de baixa potência, capaz de operar em todas as faixas de frequência ISM Sub 1GHz. Este transmissor conta com avançadas funcionalidades implementadas em hardware, como \textit{engine} criptográfica AES de 128bits, \textit{Clear Channel Assessment} (CCA) e um sistema de \textit{Wake on Radio} (eWOR) que provê baixo consumo no modo de escuta. Este modelo foi selecionado para implementação das interfaces operando nas frequências 433MHz e 915MHz. O CC1201, no entanto, não é capaz de operar na faixa de 2.4GHz, utilizada pela terceira interface. Neste caso foi utilizado outro modelo, o CC2520, também produzido pela Texas Instruments, dotado de funcionalidades semelhantes, porém adicionalmente compatível com o protocolo ZigBee\textsuperscript{\textregistered}. Na \autoref{tab_transceivers}, expandida a partir de dados presentes em \cite{Baccour2012}, encontra-se um comparativo entre os modelos selecionados e alguns outros comumente utilizados.
 
 % ---
 % Não editado

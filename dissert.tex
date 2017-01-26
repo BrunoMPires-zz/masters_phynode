@@ -78,8 +78,17 @@
 
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{footnote}
+
 \makesavenoteenv{tabular}
 \makesavenoteenv{table}
+
+% ---
+% Pacotes para figuras
+% ---
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{adjustbox}
 
 % --- 
 % CONFIGURAÇÕES DE PACOTES
@@ -729,14 +738,14 @@ A começar pela escolha dos rádios: o módulo de sistemas da plataforma PhyNode
 	\begin{tabular}{|l|l|l|l|l|l|l|}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modelo}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Frequência}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Banda}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modulação}}                    & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{TX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{RX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Potência}} \\ \hline
-		CC1000                                                        & 1 $\sim$ 3 GHz                                                   & 76.8 Kbps                                                   & 2-FSK                                                                              & 18.5 mA                                                  & 9.6 mA                                                   & 10 dBm                                                         \\ \hline
-		nRF903                                                        & 433 / 915 MHz                                                    & 76.8 Kbps                                                   & GFSK                                                                               & 19.5 mA                                                  & 22.5 mA                                                  & 10 dBm                                                         \\ \hline
-		TR1000                                                        & 916 MHz                                                          & 115.1 Kbps                                                  & OOK, ASK                                                                           & 12.0 mA                                                  & 3.8 mA                                                   & 0 dBm                                                          \\ \hline
-		\textbf{CC1201}                                               & ISM Sub 1GHz                                                     & 1.25 Mbps                                                   & \begin{tabular}[c]{@{}l@{}}2-FSK, 2-GFSK,\\ 4-FSK, 4-GFSK,\\ MSK, OOK\end{tabular} & 46.0 mA\footnote{Corrente de pico para frequência de transmissão 915MHz a +14dBm.}                                                  & 8.0 uA\footnote{Corrente média consumida utilizando o sistema eWOR (\textit{enhanced Wake On Radio}) operando a 1Hz.}                                                   & 16 dBm                                                         \\ \hline
-		CC2420                                                        & 2.4 GHz                                                          & 250 Kbps                                                    & DSSS, O-QPSK                                                                       & 17.4 mA                                                  & 19.7 mA                                                  & 0 dBm                                                          \\ \hline
-		CC2500                                                        & 2.4 GHz                                                          & 512 Kbps                                                    & 2-FSK                                                                              & 12.8 mA                                                  & 21.6 mA                                                  & 1 dBm                                                          \\ \hline
-		\textbf{CC2520}                                               & 2.4 GHz                                                          & 250 Kbps                                                    & O-QPSK                                                                             & 33.6 mA                                                  & 18.8 mA                                                  & 5 dBm                                                          \\ \hline
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modelo}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Frequência}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Banda}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Modulação}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{TX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{RX}} & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}\textbf{Potência}} \\ \hline
+		CC1000 & 1 $\sim$ 3 GHz & 76.8 Kbps & 2-FSK & 18.5 mA & 9.6 mA & 10 dBm \\ \hline
+		nRF903 & 433 / 915 MHz  & 76.8 Kbps & GFSK & 19.5 mA & 22.5 mA & 10 dBm \\ \hline
+		TR1000 & 916 MHz & 115.1 Kbps & OOK, ASK & 12.0 mA & 3.8 mA & 0 dBm \\ \hline
+		\textbf{CC1201} & ISM Sub 1GHz & 1.25 Mbps & \begin{tabular}[c]{@{}l@{}}2-FSK, 2-GFSK,\\ 4-FSK, 4-GFSK,\\ MSK, OOK\end{tabular} & 46.0 mA\footnote{Corrente de pico para frequência de transmissão 915MHz a +14dBm.} & 8.0 uA\footnote{Corrente média consumida utilizando o sistema eWOR (\textit{enhanced Wake On Radio}) operando a 1Hz.} & 16 dBm \\ \hline
+		CC2420 & 2.4 GHz & 250 Kbps & DSSS, O-QPSK & 17.4 mA & 19.7 mA & 0 dBm \\ \hline
+		CC2500 & 2.4 GHz & 512 Kbps & 2-FSK & 12.8 mA & 21.6 mA & 1 dBm \\ \hline
+		\textbf{CC2520} & 2.4 GHz & 250 Kbps & O-QPSK & 33.6 mA & 18.8 mA & 5 dBm \\ \hline
 	\end{tabular}
 	\legend{Fonte: Adaptado de \cite{Baccour2012}}
 \end{table}
@@ -744,6 +753,30 @@ A começar pela escolha dos rádios: o módulo de sistemas da plataforma PhyNode
 Adicionalmente, num sistema dotado de múltiplas interfaces, o ideal é que o formato dos barramentos de comunicação entre as diversas interfaces e a MCU seja o mais uniforme possível \cite{Lymberopoulos2008}. Devido à grande distância entre as faixas de frequência utilizadas nas três interfaces da plataforma PhyNode não foi possível encontrar um único modelo de transmissor que fosse capaz de lidar com todas elas. No entanto foram escolhidos modelos com arquiteturas compatíveis entre si e equipados com interfaces de comunicação semelhantes.
 
 O CC1201, produzido pela Texas Instruments, é um transmissor de baixa potência, capaz de operar em todas as faixas de frequência ISM Sub 1GHz. Este transmissor conta com avançadas funcionalidades implementadas em hardware, como \textit{engine} criptográfica AES de 128bits, \textit{Clear Channel Assessment} (CCA) e um sistema de \textit{Wake on Radio} (eWOR) que provê baixo consumo no modo de escuta. Este modelo foi selecionado para implementação das interfaces operando nas frequências 433MHz e 915MHz. O CC1201, no entanto, não é capaz de operar na faixa de 2.4GHz, utilizada pela terceira interface. Neste caso foi utilizado outro modelo, o CC2520, também produzido pela Texas Instruments, dotado de funcionalidades semelhantes, porém adicionalmente compatível com o protocolo ZigBee\textsuperscript{\textregistered}. Na \autoref{tab_transceivers}, expandida a partir de dados presentes em \cite{Baccour2012}, encontra-se um comparativo entre os modelos selecionados e alguns outros comumente utilizados.
+
+A fim de prover uma arquitetura modular e expansível para a plataforma PhyNode, os três radiotransmissores são conectados ao mesmo barramento SPI (\textit{Serial Peripheral Interface}) e a MCU dedica uma de suas interfaces de comunicação exclusivamente a este barramento. A conexão de interfaces externas adicionais também é suportada. A comunicação entre os tranmissores e a MCU é incrementada através do uso de pinos de interrupção programáveis. O CC2520 conta com seis destes pinos, e o CC1201 conta com três deles. Já as MCUs permitem que a maioria de seus pinos sejam conectados programaticamente a alguns barramentos internos de interrupção, capazes de operar com diferentes níveis de prioridade. A utilização de pinos de interrupção programáveis possibilita a notificação quase instantânea de diversos eventos, sem que seja necessário para isso utilizar o barramento de comunicação e rotinas de \textit{pooling}, o que viabiliza a implementação de rotinas de tratamento mais eficientes e de menor latência. Este recurso também torna possível que componentes aguardem certos eventos em modo de baixo consumo, sendo acordados através das interrupções quando necessário.
+
+\begin{figure}[hbt]
+	\centering
+	\caption{\label{fig_prototype}Protótipos do módulo PhyNode}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.98\linewidth]{PhyNode_3D}
+		\captionsetup{width=.9\textwidth}
+		\caption{Simulação 3D da montagem final do módulo PhyNode no software Proteus (CAD)}
+		\label{fig_prototype_3d}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.98\linewidth]{PhyNode_Assembled}
+		\captionsetup{width=.9\linewidth}
+		\caption{Módulo de comunicação PhyNode, a esquerda. Do lado direito uma Nucleo Board.}
+		\label{fig_prototype_assembled}
+	\end{subfigure}
+	\legend{Fonte: Elaboração própria.}
+\end{figure}
+
+A \autoref{fig_prototype_3d} apresenta uma modelagem 3D do \textit{shield} de sistemas da plataforma PhyNode, disponibilizada pelo software CAD utilizado para seu projeto. Pode-se reparar nos três circuitos de transmissão, situados na parte superior do shield. A \autoref{fig_prototype_assembled} apresenta o primeiro protótipo já montado, com as respectivas antenas conectadas, a direta o \textit{shield} de sistemas e a esquerda uma STM32Nucleo.
 
 % ---
 % Não editado

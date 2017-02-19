@@ -77,10 +77,17 @@
 % ---
 
 \usepackage[table,xcdraw]{xcolor}
+\usepackage{longtable}
 \usepackage{footnote}
 
 \makesavenoteenv{tabular}
 \makesavenoteenv{table}
+
+\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 % ---
 % Pacotes para figuras
@@ -117,7 +124,7 @@
 \titulo{Seleção dinâmica de interface em redes \\ IEEE 802.15.4}
 \autor{Bruno Monteiro Pires}
 \local{Rio Claro}
-\data{2016}
+\data{2017}
 \orientador{Alexandro José Baldassin}
 \coorientador{Alex Roschildt Pinto}
 \instituicao{
@@ -230,35 +237,35 @@
 %     \includepdf{fig_ficha_catalografica.pdf}
 % \end{fichacatalografica}
 
-\begin{fichacatalografica}
-	\sffamily
-	\vspace*{\fill}					% Posição vertical
-	\begin{center}					% Minipage Centralizado
-	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
-	\small
-	\imprimirautor
-	%Sobrenome, Nome do autor
-	
-	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
-	\imprimirlocal, \imprimirdata-
-	
-	\hspace{0.5cm} \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\\
-	
-	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
-	
-	\hspace{0.5cm}
-	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
-	\imprimirdata.}\\
-	
-	\hspace{0.5cm}
-		1. IEEE802.15.4.
-		I. Alexandro José Baldassin.
-		II. Universidade Estadual Paulista.
-		III. Instituto de Biociências, Letras e Ciências Exatas.
-		IV. Seleção dinâmica de interface em redes IEEE 802.15.4
-	\end{minipage}}
-	\end{center}
-\end{fichacatalografica}
+%\begin{fichacatalografica}
+%	\sffamily
+%	\vspace*{\fill}					% Posição vertical
+%	\begin{center}					% Minipage Centralizado
+%	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+%	\small
+%	\imprimirautor
+%	%Sobrenome, Nome do autor
+%	
+%	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+%	\imprimirlocal, \imprimirdata-
+%	
+%	\hspace{0.5cm} \pageref{LastPage} p. : il. (algumas color.) ; 30 cm.\\
+%	
+%	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+%	
+%	\hspace{0.5cm}
+%	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+%	\imprimirdata.}\\
+%	
+%	\hspace{0.5cm}
+%		1. IEEE802.15.4.
+%		I. Alexandro José Baldassin.
+%		II. Universidade Estadual Paulista.
+%		III. Instituto de Biociências, Letras e Ciências Exatas.
+%		IV. Seleção dinâmica de interface em redes IEEE 802.15.4
+%	\end{minipage}}
+%	\end{center}
+%\end{fichacatalografica}
 % ---
 
 % ---
@@ -290,11 +297,11 @@
     \vspace*{\fill}
    \end{center}
         
-   Trabalho aprovado. \imprimirlocal, 22 de dezembro de 2016:
+   Trabalho aprovado. \imprimirlocal, 03 de março de 2017:
 
    \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
-   \assinatura{\textbf{Professor} \\ Convidado 1}
-   \assinatura{\textbf{Professor} \\ Convidado 2}
+   \assinatura{\textbf{Profa. Dra. Juliana Freitag Borin} \\ Membro Externo}
+   \assinatura{\textbf{Prof. Dr. Ivan Rizzo Guilherme} \\ Membro Interno}
    %\assinatura{\textbf{Professor} \\ Convidado 3}
    %\assinatura{\textbf{Professor} \\ Convidado 4}
       
@@ -312,37 +319,37 @@
 % ---
 % Dedicatória
 % ---
-\begin{dedicatoria}
-   \vspace*{\fill}
-   \centering
-   \noindent
-   \textit{ Este trabalho é dedicado às crianças adultas que,\\
-   quando pequenas, sonharam em se tornar cientistas.} \vspace*{\fill}
-\end{dedicatoria}
+%\begin{dedicatoria}
+%   \vspace*{\fill}
+%   \centering
+%   \noindent
+%   \textit{Este trabalho é dedicado às crianças adultas que,\\
+%   quando pequenas, sonharam em se tornar cientistas.} \vspace*{\fill}
+%\end{dedicatoria}
 % ---
 
 % ---
 % Agradecimentos
 % ---
-\begin{agradecimentos}
-Os agradecimentos principais são direcionados à Gerald Weber, Miguel Frasson,
-Leslie H. Watter, Bruno Parente Lima, Flávio de Vasconcellos Corrêa, Otavio Real
-Salvador, Renato Machnievscz\footnote{Os nomes dos integrantes do primeiro
-projeto abn\TeX\ foram extraídos de
-\url{http://codigolivre.org.br/projects/abntex/}} e todos aqueles que
-contribuíram para que a produção de trabalhos acadêmicos conforme
-as normas ABNT com \LaTeX\ fosse possível.
-
-Agradecimentos especiais são direcionados ao Centro de Pesquisa em Arquitetura
-da Informação\footnote{\url{http://www.cpai.unb.br/}} da Universidade de
-Brasília (CPAI), ao grupo de usuários
-\emph{latex-br}\footnote{\url{http://groups.google.com/group/latex-br}} e aos
-novos voluntários do grupo
-\emph{\abnTeX}\footnote{\url{http://groups.google.com/group/abntex2} e
-\url{http://www.abntex.net.br/}}~que contribuíram e que ainda
-contribuirão para a evolução do \abnTeX.
-
-\end{agradecimentos}
+%\begin{agradecimentos}
+%Os agradecimentos principais são direcionados à Gerald Weber, Miguel Frasson,
+%Leslie H. Watter, Bruno Parente Lima, Flávio de Vasconcellos Corrêa, Otavio Real
+%Salvador, Renato Machnievscz\footnote{Os nomes dos integrantes do primeiro
+%projeto abn\TeX\ foram extraídos de
+%\url{http://codigolivre.org.br/projects/abntex/}} e todos aqueles que
+%contribuíram para que a produção de trabalhos acadêmicos conforme
+%as normas ABNT com \LaTeX\ fosse possível.
+%
+%Agradecimentos especiais são direcionados ao Centro de Pesquisa em Arquitetura
+%da Informação\footnote{\url{http://www.cpai.unb.br/}} da Universidade de
+%Brasília (CPAI), ao grupo de usuários
+%\emph{latex-br}\footnote{\url{http://groups.google.com/group/latex-br}} e aos
+%novos voluntários do grupo
+%\emph{\abnTeX}\footnote{\url{http://groups.google.com/group/abntex2} e
+%\url{http://www.abntex.net.br/}}~que contribuíram e que ainda
+%contribuirão para a evolução do \abnTeX.
+%
+%\end{agradecimentos}
 % ---
 
 % ---
@@ -350,31 +357,33 @@ contribuirão para a evolução do \abnTeX.
 % ---
 
 % resumo em português
-%\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
-%\begin{resumo}
-% Segundo a \citeonline[3.1-3.2]{NBR6028:2003}, o resumo deve ressaltar o
-% objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
-% destes itens dependem do tipo de resumo (informativo ou indicativo) e do
-% tratamento que cada item recebe no documento original. O resumo deve ser
-% precedido da referência do documento, com exceção do resumo inserido no
-% próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
-% resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
-% ponto e finalizadas também por ponto.
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+ 
+ 
+ Segundo a \citeonline[3.1-3.2]{NBR6028:2003}, o resumo deve ressaltar o
+ objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+ destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+ tratamento que cada item recebe no documento original. O resumo deve ser
+ precedido da referência do documento, com exceção do resumo inserido no
+ próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+ resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+ ponto e finalizadas também por ponto.
 
-% \textbf{Palavras-chave}: latex. abntex. editoração de texto.
-%\end{resumo}
+ \textbf{Palavras-chave}: IEEE 802.15.4. diversidade de interfaces. MAC. estimativa de qualidade do link.
+\end{resumo}
 
 % resumo em inglês
-%\begin{resumo}[Abstract]
-% \begin{otherlanguage*}{english}
-%   This is the english abstract.
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+   This is the english abstract.
 
-%   \vspace{\onelineskip}
+   \vspace{\onelineskip}
  
-%   \noindent 
-%   \textbf{Keywords}: latex. abntex. text editoration.
-% \end{otherlanguage*}
-%\end{resumo}
+   \noindent 
+   \textbf{Keywords}: latex. abntex. text editoration.
+ \end{otherlanguage*}
+\end{resumo}
 % ---
 
 % ---
@@ -653,7 +662,7 @@ O cenário descrito acima trás certas consequências negativas para o ecossiste
 	\legend{Fonte: elaboração prórpia.}
 \end{table}
 
-No entanto a demanda por iniciativas capazes de lidar com estes dilemas tem aumentado. O padrão IEEE 802.15.4 \cite{IEEE2003} foi especificamente concebido para utilização em sistemas de comunicação de baixa potência, baixo custo e que operem com baixas taxas de transferência. Este padrão destina-se à aplicações que requeiram links de comunicação de curto alcance e alta eficiência energética, nele são especificadas implementações para as duas camadas inferiores da pilha de protocolos: a camada física (PHY) e a camada de enlace, ou controle de acesso ao meio (MAC), conforme definidas pelo modelo OSI (apresentado na \autoref{tab_osi}). A arquitetura das camadas superiores é deferida aos diversos protocolos que implementam o IEEE 802.15.4, como 6LoWPAN \cite{Montenegro2007}, ZigBee \cite{ZigBee2005}, WirelessHART \cite{Kim2008}.
+No entanto a demanda por iniciativas capazes de lidar com estes dilemas tem aumentado. O padrão IEEE 802.15.4 \cite{IEEE2003} foi especificamente concebido para utilização em sistemas de comunicação de baixa potência, baixo custo e que operem com baixas taxas de transferência, aos quais se refere como LR-WPANs (\textit{Low Rate Personal Area Networks}). Este padrão destina-se à aplicações que requeiram links de comunicação de curto alcance e alta eficiência energética, nele são especificadas implementações para as duas camadas inferiores da pilha de protocolos: a camada física (PHY) e a camada de enlace, ou controle de acesso ao meio (MAC), conforme definidas pelo modelo OSI (apresentado na \autoref{tab_osi}). A arquitetura das camadas superiores é deferida aos diversos protocolos que implementam o IEEE 802.15.4, como 6LoWPAN \cite{Montenegro2007}, ZigBee \cite{ZigBee2005}, WirelessHART \cite{Kim2008}.
 
 O padrão IEEE 802.15.4 define dois tipos de nodos: dispositivos com funcionalidade completa (\textit{full-functioning device}, ou FFD) e dispositivos com funcionalidade reduzida (\textit{reduced-function device}, ou RFD). RFDs são dispositivos dotados de menor capacidade de processamento e memória, localizados nas extremidades das redes e cuja funcionalidade se resume a estabelecer comunicação com algum FFD. Já os FFDs são dispositivos com maior capacidade embarcada de processamento e capazes de implementar completamente o padrão, são responsáveis por coordenar as atividades de comunicação e roteamento. Também é definido no IEEE 802.15.4 o suporte a duas topologias de rede: estrela e \textit{peer-to-peer}. \cite{Rawat2014}. Ao utilizar a topologia estrela todos os nodos devem se comunicar com um dispositivo controlador central, do tipo FFD. Já através da topologia \textit{peer-to-peer} é possível estabelecer links de comunicação entre dois nodos quaisquer, o que permite que se produzam rede mais complexas, como por exemplo redes \textit{mesh}, onde diversos nodos dispostos de forma potencialmente irregular colaboram para estabelecer rotas de comunicação entre si, mesmo que não sejam capazes de se comunicar diretamente.
 
@@ -663,21 +672,103 @@ A primeira revisão aprovada do padrão, publicada como IEEE 802.15.4-2006 \cite
 
 Apenas um ano após a aprovação desta revisão foi proposta sua primeira emenda, dando origem ao IEEE 802.15.4a \cite{IEEE2007}. Através desta emenda foram incorporadas mais duas especificações PHY opcionais: o \textit{Chirp Spread Spectrum} (CSS), capaz de elevar a taxa de transferência na faixa de 2450 MHz para 1000 kbps, e a Ultra-wide Band (UWB) destinada à operação nas faixs de 3 GHz, 5 GHz e 6 GHz a 10 GHz e capaz de fornecer taxas de transferência de até 27.4 Mbps.
 
-Em se tratando de padronização dos meios de difusão via radiofrequência, o maior empecilho encontrado está relacionado às divergências presentes nas regulamentações locais existentes em cada país. A alocação de bandas de frequência pode variar de acordo com as leis de cada país, exigindo certa flexibilidade dos padrões que visem obter permissão para operar globalmente. No caso do IEEE 802.15.4, as definições de camada PHY são destinadas à operação nas bandas ISM (\textit{Industrial, Scientific an Medical}), bandas de frequência internacionalmente reservadas para fins industriais, científicos e médicos, não necessariamente relacionados à transmissão de dados e que, por este motivo, apresentam menor variabilidade quanto ao espectro utilizado globalmente. Adicionalmente, devido à finalidade para qual são destinadas, as regulamentações que incidem sobre as bandas ISM tendem a ser mais permissiva quanto à irradiação não licenciada.
+Em se tratando de padronização dos meios de difusão via radiofrequência, o maior empecilho encontrado está relacionado às divergências presentes nas regulamentações locais existentes em cada país. A alocação de bandas de frequência pode variar de acordo com as leis de cada país, exigindo certa flexibilidade dos padrões que visem obter permissão para operar globalmente. No caso do IEEE 802.15.4, as definições de camada PHY são destinadas à operação nas bandas ISM (\textit{Industrial, Scientific an Medical}), bandas de frequência internacionalmente reservadas para fins industriais, científicos e médicos, não necessariamente relacionados à transmissão de dados e que, por este motivo, apresentam menor variabilidade quanto as bandas de frequência alocadas nas diferentes regiões do planeta. Adicionalmente, devido à finalidade para qual são destinadas, as regulamentações que incidem sobre as bandas ISM tendem a ser mais permissivas quanto à irradiação não licenciada.
 
 O sinal de transmissão associado ao PHY \textit{Ultra-wide Band} (UWB) possui ocupação espectral instantânea superior a 500 MHz e largura fracionária de banda superior a 20\%, o que permite alta eficiência espectral e altas taxas de transferência com baixo consumo energético, além de proporcionar alta tolerância aos efeitos da propagação multi-caminho \cite{Porcino2003}. Estas características, no entanto, fazem com que UWB requeira maior largura de banda do que a disponibilizada nas faixas de frequência ISM, caracterizando-a como a única definição de camada PHY incorporada ao IEEE 802.15.4 a não ser destinada às bandas ISM. Adicionalmente, as técnicas de transmissão utilizadas por UWB baseiam-se em pulsos de rádio extremamente curtos, emitidos através de sequências periódicas, o que torna a tecnologia inadequada para utilização em ambientes perigosos, devido à emissão de pulsos de alta energia. UBW também não é adequada para transmissões de longa distância \cite{Rawat2014}.
 
-Ainda com o intuito de possibilitar maior abrangência geográfica ao padrão, apenas dois anos após a aprovação da emenda IEEE 802.15.4a, foram introduzidas as emendas IEEE 802.15.4c \cite{IEEE802_15_4c} e IEEE 802.15.4d \cite{IEEE802_15_4d}, destinadas a introduzir novas definições para a camada PHY, compatíveis com a operação nas bandas de frequência ISM disponíveis na China e no Japão. IEEE 802.15.4c introduz definições para operação nas bandas de frequência 314-316 MHz, 430-434 MHz e 779-787 MHz, assim como adequações na camada MAC a fim de compatibilizar o padrão com as regulamentação vigente à época, na China. Já o IEEE 802.15.4d define o suporte à operação na banda de 950 MHz assim como adequações necessárias na camada MAC a fim de permitir a operação de acordo com as regulamentações vigentes à época, no Japão. Estas duas emendas foram incluídas na revisão seguinte, publicada como IEEE 802.15.4-2011 \cite{IEEE802_15_4_2011}, e introduzida com o objetivo de reestruturar a divisão dos requisitos aplicáveis às diferentes implementações definidas pelo padrão.
+Ainda com o intuito de possibilitar maior abrangência geográfica ao padrão, apenas dois anos após a aprovação da emenda IEEE 802.15.4a, foram introduzidas as emendas IEEE 802.15.4c \cite{IEEE802_15_4c} e IEEE 802.15.4d \cite{IEEE802_15_4d}, destinadas a introduzir novas definições para a camada PHY, compatíveis com a operação nas bandas de frequência ISM disponíveis na China e no Japão. IEEE 802.15.4c introduz definições para operação nas bandas de frequência 314-316 MHz, 430-434 MHz e 779-787 MHz, assim como adequações na camada MAC a fim de compatibilizar o padrão com as regulamentação vigente à época, na China. Já o IEEE 802.15.4d define o suporte à operação na banda de 950 MHz assim como adequações necessárias na camada MAC a fim de permitir a operação de acordo com as regulamentações vigentes à época, no Japão. Estas duas emendas foram incluídas na revisão seguinte, IEEE 802.15.4-2011 \cite{IEEE802_15_4_2011}.
 
-À época da elaboração do presente estudo, a última revisão realizada do padrão foi publicada como IEEE 802.15.4-2015 \cite{IEEE802_15_4_2015} e realizada com o intuito de introduzir as emendas propostas em IEEE 802.15.4e \cite{IEEE802_15_4e}, IEEE 802.15.4f \cite{IEEE802_15_4f} e IEEE 802.15.4g \cite{IEEE802_15_4g}. As alterações contidas nesta revisão incluem o suporte a diversas novas definições para a camada PHY e funcionalidades adicionais para a camada MAC, como novos formatos de \textit{frame}, priorização de acesso aos canais e também mecanismos para redução do consumo de energia. Existem ainda diversas propostas de emenda aguardando a próxima revisão. Dentre elas se destaca o IEEE 802.15.4q \cite{IEEE802_15_4q}, cujo foco é no suporte à definição de PHYs \textit{Ultra Low Power}(ULP), destinados a dispositivos de baixo consumo, alimentados por baterias e com previsão de vida útil de vários anos. Também se destaca o IEEE 802.15.4m \cite{IEEE802_15_4m}, que visa prover suporte para definições de camada PHY operando na faixa de 54 MHz a 862 MHz
+A última revisão publicada do padrão, até a presente data, foi a IEEE 802.15.4-2015 \cite{IEEE802_15_4_2015}, realizada com o intuito de introduzir as emendas propostas em IEEE 802.15.4e \cite{IEEE802_15_4e}, IEEE 802.15.4f \cite{IEEE802_15_4f} e IEEE 802.15.4g \cite{IEEE802_15_4g}. As alterações contidas nesta revisão incluem o suporte a diversas novas definições para a camada PHY e funcionalidades adicionais para a camada MAC, como novos formatos de \textit{frames}, priorização de acesso aos canais e também mecanismos para redução do consumo de energia. Existem ainda diversas propostas de emenda aguardando a publicação de uma próxima revisão. Dentre elas se destaca o IEEE 802.15.4q \cite{IEEE802_15_4q}, cujo foco é no suporte à definição de PHYs \textit{Ultra Low Power}(ULP), destinados a dispositivos de baixo consumo, alimentados por baterias e com previsão de vida útil de vários anos. Se destaca também o IEEE 802.15.4m \cite{IEEE802_15_4m}, que visa prover suporte para definições de camada PHY operando na faixa de 54 MHz a 862 MHz de forma a reaproveitar bandas antes destinadas à difusão de sinais de TV analógica e que atualmente se encontram ociosas, às que se refere como \textit{TV White Space}.
+
 \begin{center}
 	\textbf{--- Adicionar tabelas com PHYs e Bandas de frequência ---}
 \end{center}
 
- 
+Para que um dispositivo seja considerado compatível com o padrão IEEE 802.15.4 é necessário que forneça suporte completo a pelo menos uma das especificações das camadas PHY e MAC nele definidas. Podendo opcionalmente oferecer suporte a mais de uma especificação. A escolha de quais especificações utilizar varia, e é baseada nas necessidades específicas de cada aplicação.
 
-Se comparado a outros padrões bem difundidos, o IEEE 802.15.4 permite taxas de transferência menores que as disponíveis no IEEE 802.11, mas maior alcance que do que seria possível utilizando-se o IEEE 802.15.1 \cite{IEEE2005}. Contudo o IEEE 802.15.4 se destaca por possibilitar menor consumo energético, quando comparado aos demais padrões de série IEEE 802.$X$.
+\begin{table}[]
+	\centering
+	\caption{Definições PHY do IEEE 802.15.4 Rev.2003, Rev.2006 e Rev.2011}
+	\label{my-label}
+	\begin{adjustbox}{center}
+		\begin{tabular}{|K{1.5cm}|K{2.5cm}|K{4.0cm}|K{2.5cm}|K{4.5cm}|}
+			\hline
+			\textbf{Revisão} & \textbf{PHY} & \textbf{Banda de frequência (MHz)} & \textbf{Modulação} & \textbf{Taxa de transferência (kb/s)} \\ \hline
+			\multirow{3}{*}{2003} & \multirow{2}{*}{868/915} & 868 - 868.6 & BPSK & 20 \\ \cline{3-5} 
+			&  & 902 - 928 & BPSK & 40 \\ \cline{2-5} 
+			& 2450 & 2400 - 2483.5 & O-QPSK & 250 \\ \hline
+			\multirow{4}{*}{2006} & \multirow{2}{*}{868/915} & 868 - 868.6 & ASK & 250 \\ \cline{3-5} 
+			&  & 902 - 928 & ASK & 250 \\ \cline{2-5} 
+			& \multirow{2}{*}{868/915} & 868 - 868.6 & O-QPSK & 100 \\ \cline{3-5} 
+			&  & 902 - 928 & O-QPSK & 250 \\ \hline
+			\multirow{13}{*}{2011} & \multirow{2}{*}{780} & 779 - 787 & O-QPSK & 250 \\ \cline{3-5} 
+			& & 779 - 787 & MPSK & 250 \\ \cline{2-5} 
+			& \multirow{2}{*}{950} & 950 - 956 & GFSK & 100 \\ \cline{3-5} 
+			& & 950 - 956 & BPSK & 20 \\ \cline{2-5} 
+			& 2450 DSSS & 2400 - 2483.5 & O-QPSK & 250 \\ \cline{2-5} 
+			& \multirow{2}{*}{2450 CSS} & \multirow{2}{*}{2400 - 2483.5} & \multirow{2}{*}{CSS/D-QPSK} & 250 \\ \cline{5-5} 
+			&  &  &  & 1000 \\ \cline{2-5} 
+			& UWB sub-gigahertz & 250 - 750 & \multirow{6}{*}{BPM/BPSK} & \multirow{6}{*}{110, 850, 6800, 27240}  \\ \cline{2-3}
+			& UWB low band & 3244 - 4742 &  &  \\ \cline{2-3}
+			& UWB high band & 5944 - 10234 &  &  \\ \hline
+		\end{tabular}
+	\end{adjustbox}
+	\legend{Fonte: elaboração prórpia.}
+\end{table}
 
+\begin{table}[htb]
+	\centering
+	\caption{Definições PHY do IEEE 802.15.4-2015}
+	\label{tab_ieee_802_15_4_2015_phy}
+	\begin{adjustbox}{center}
+		\begin{tabular}{|M{3.0cm}|M{5.5cm}|M{2.5cm}|M{5.5cm}|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{PHY}} & \textbf{Banda de frequência (MHz)} & \textbf{Modulação} & \textbf{Taxa de transferência (kb/s)} \\ \hline
+			\multirow{2}{*}{O-QPSK} & 868 & \multirow{2}{*}{O-QPSK} & 100 \\ \cline{2-2} \cline{4-4} 
+			& 780, 915, 2380, 2450 &  & 250 \\ \hline
+			\multirow{2}{*}{BPSK} & 868 & \multirow{2}{*}{BPSK} & 20 \\ \cline{2-2} \cline{4-4} 
+			& 915 &  & 40 \\ \hline
+			ASK & 868, 915 & ASK/PSSS & 250 \\ \hline
+			CSS & 2450 & \specialcell{CSS/\\D-QPSK} & 250, 1000 \\ \hline
+			\multirow{6}{*}{HRP-UWB} & \specialcell{HRP-UWB\\(sub-gigahertz)} & \multirow{6}{*}{BPM/BPSK} & \multirow{6}{*}{110, 850, 6800, 27240} \\ \cline{2-2}
+			& \specialcell{HRP-UWB\\(low-band)} &  &  \\ \cline{2-2}
+			& \specialcell{HRP UWB\\(high-band)} &  &  \\ \hline
+			MPSK & 780 & MPSK & 250 \\ \hline
+			GFSK & 920 & GFSK & 100 \\ \hline
+			\multirow{2}{*}{MSK} & 2450 & \multirow{2}{*}{MSK} & 250 \\ \cline{2-2} \cline{4-4} 
+			& 433 &  & 31.25, 100, 250 \\ \hline
+			\multirow{2}{*}{LRP-UWB} & \multirow{2}{*}{LRP UWB} & PPM & 31.25 \\ \cline{3-4} 
+			&  & OOK & 250, 1000 \\ \hline
+			\multirow{8}{*}{SUN FSK} & \multirow{2}{*}{169} & 2-FSK & 2.4, 4.8 \\ \cline{3-4} 
+			&  & 4-FSK & 9.6 \\ \cline{2-4} 
+			& \multirow{2}{*}{450} & 2-FSK & 4.8 \\ \cline{3-4} 
+			&  & 4-FSK & 9.6 \\ \cline{2-4} 
+			& \multirow{2}{*}{470, 780, 863} & 2-FSK & 50, 100 \\ \cline{3-4} 
+			&  & 4-FSK & 200 \\ \cline{2-4} 
+			& 896, 901, 928, 1427 & \multirow{2}{*}{2-FSK} & 10, 20, 40 \\ \cline{2-2} \cline{4-4} 
+			& 915, 917, 2450 &  & 50, 150, 200 \\ \hline
+			\multirow{3}{*}{SUN OFDM} & \multirow{3}{5.5cm}{\centering 470, 780, 863, 915, 917, 920, 2450} & BPSK & 50, 100, 200 \\ \cline{3-4}
+			&  & QPSK & 50, 100, 150, 200, 300, 400, 800 \\ \cline{3-4}
+			&  & 16-QAM & 200, 300, 400, 600, 800 \\ \hline
+			\multirow{2}{*}{SUN O-QPSK} & 470, 868, 920 & \multirow{2}{*}{O-QPSK} & 6.25, 12.5, 25, 50 \\ \cline{2-2} \cline{4-4} 
+			& 780, 915, 917, 2450 &  & 31.25, 125, 250, 500 \\ \hline
+			LECIM DSSS & 470, 780, 863, 915, 922, 917, 920, 921, 2450 & \specialcell{BPSK/\\O-QPSK} & \textless 500 \\ \hline
+			\multirow{3}{*}{LECIM FSK} & 169 & \multirow{3}{*}{FSK/P-FSK} & 12.5, 25 \\ \cline{2-2} \cline{4-4} 
+			& 433, 470, 780, 863, 915, 922, 917, 920, 921 &  & 12.5, 25, 37.5 \\ \hline
+			\multirow{2}{*}{\specialcell{TVWS\\FSK}} & \multirow{2}{5.5cm}{\centering Definições regionais podem variar.} & 2-FSK & 50, 100, 200, 300 \\ \cline{3-4}
+			&  & 4-FSK & 400 \\ \hline
+			\multirow{3}{*}{\specialcell{TVWS\\OFDM}} & \multirow{3}{5.5cm}{\centering Definições regionais podem variar}. & BPSK & 390.625, 1562.5 \\ \cline{3-4}
+			&  & QPSK & 781.50, 3125 \\ \cline{3-4}
+			&  & 16-QAM & 1562.5, 6250\\ \hline
+			\multirow{4}{*}{\specialcell{TVWS\\NB-OFDM}} & \multirow{4}{5.5cm}{\centering Definições regionais  podem variar.}& BPSK & 156, 234 \\ \cline{3-4}
+			&  & QPSK & 312, 468 \\ \cline{3-4}
+			&  & 16-QAM & 624, 936 \\ \cline{3-4}
+			&  & 64-QAM & 1404, 1638 \\ \hline
+			RCC LMR & 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928, 2450, 4965, 5800 &  & 9.6, 16, 19.2, 32, 36, 38.4 \\ \hline
+			RCC DSSS & 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928, 2450, 4965, 5800 &  & 9.6, 16, 19.2, 32, 36, 38.4 \\ \hline
+		\end{tabular}
+	\end{adjustbox}
+\end{table}
 
 %---
 % Not edited

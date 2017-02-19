@@ -79,6 +79,7 @@
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{longtable}
 \usepackage{footnote}
+\usepackage{afterpage}
 
 \makesavenoteenv{tabular}
 \makesavenoteenv{table}
@@ -640,11 +641,11 @@ Os mecanismos baseados em software provêm informações a respeito do link a pa
 
 \section{Iniciativas de padronização}
 
-Como citado anteriormente, a grande diversidade de aplicações às quais se destinam as redes de sensores sem fios gera a demanda por tecnologias de comunicação bastante diversificadas. No entanto a propagação tardia desta tecnologia à segmentos de mercado que permitissem sua utilização em larga escala favoreceu a disseminação de uma grande quantidade de protocolos de escopo pouco abrangente, destinados a aplicações específicas e, consequentemente, pouco desenvolvidos. Desenvolveu-se de forma semelhante o hardware utilizado para implementação destes sistemas, o qual era até recentemente baseado em componentes de uso geral ou em componentes emprestados de outras aplicações. Isto se devia à pouca demanda existente para componentes especificamente destinados aos requisitos das redes de sensores sem fios, que não justificava o esforço de grandes fabricantes para disponibilizar ao mercado soluções específicas, e também ao fato de que componentes desta natureza não podem ser projetados ou produzidos em pequena escala com o objetivo de, por exemplo, integrarem somente uma solução experimental ou de pequena escala.
+Como citado anteriormente, a grande diversidade de aplicações às quais se destinam as redes de sensores sem fios gera a demanda por tecnologias de comunicação bastante diversificadas. No entanto a propagação tardia desta tecnologia à segmentos de mercado que permitissem sua utilização em larga escala favoreceu a disseminação de uma grande quantidade de protocolos de escopo pouco abrangente, destinados à aplicações específicas e que, consequentemente, recebiam poucas revisões e aprimoramentos. Nestas condições frequentemente tornava-se mais vantajoso iniciar o desenvolvimento de um novo protocolo do que buscar alternativas suficientemente maduras para integração à soluções finais. Desenvolveu-se de forma semelhante o hardware utilizado para a implementação destes sistemas, o qual costumava ser até recentemente baseado em componentes de uso geral ou originalmente destinados à outras aplicações. Fato este que se devia principalmente à pouca demanda existente para componentes especificamente destinados aos requisitos das redes de sensores sem fios, e que não justificava o esforço de fabricantes para projetar e disponibilizar soluções específicas ao mercado. O projeto e a produção de componentes desta natureza requer processos industriais de alta complexidade, que se tornam financeiramente viáveis somente em maior escala, impossibilitando o obtenção de componentes customizados com o objetivo de integrar somente soluções experimentais ou outras implementações de pequena escala.
 
 O cenário descrito acima trás certas consequências negativas para o ecossistema de desenvolvimento das redes de sensores sem fios. Mais especificamente: a proliferação de uma grande quantidade de protocolos pouco difundidos impõe uma barreira para a capacidade de interoperabilidade destes sistemas. Adicionalmente a utilização destes protocolos em aplicações isoladas ou de pequena escala faz com que não existam esforços significativamente abrangentes direcionados para seu aprimoramento. O que também desencoraja a disseminação de soluções de hardware especificamente destinadas à utilização nas redes de sensores sem fios e outros sistemas interconectados de baixa potência.
 
-\begin{table}[hbt]
+\begin{table}[b!]
 	\centering
 	\caption{Camadas do modelo OSI}
 	\label{tab_osi}
@@ -662,15 +663,15 @@ O cenário descrito acima trás certas consequências negativas para o ecossiste
 	\legend{Fonte: elaboração prórpia.}
 \end{table}
 
-No entanto a demanda por iniciativas capazes de lidar com estes dilemas tem aumentado. O padrão IEEE 802.15.4 \cite{IEEE2003} foi especificamente concebido para utilização em sistemas de comunicação de baixa potência, baixo custo e que operem com baixas taxas de transferência, aos quais se refere como LR-WPANs (\textit{Low Rate Personal Area Networks}). Este padrão destina-se à aplicações que requeiram links de comunicação de curto alcance e alta eficiência energética, nele são especificadas implementações para as duas camadas inferiores da pilha de protocolos: a camada física (PHY) e a camada de enlace, ou controle de acesso ao meio (MAC), conforme definidas pelo modelo OSI (apresentado na \autoref{tab_osi}). A arquitetura das camadas superiores é deferida aos diversos protocolos que implementam o IEEE 802.15.4, como 6LoWPAN \cite{Montenegro2007}, ZigBee \cite{ZigBee2005}, WirelessHART \cite{Kim2008}.
+No entanto a demanda por iniciativas capazes de lidar com estes dilemas tem aumentado. O padrão IEEE 802.15.4 \cite{IEEE2003} foi especificamente concebido para utilização em sistemas de comunicação de baixa potência, baixo custo e que operem com baixas taxas de transferência, aos quais se refere como LR-WPANs (\textit{Low Rate Personal Area Networks}). Este padrão destina-se à aplicações que requeiram links de comunicação de curto alcance e alta eficiência energética, nele são especificadas implementações para as duas camadas inferiores da pilha de protocolos, como definidas pelo modelo OSI (apresentado na \autoref{tab_osi}): a camada física (PHY) e a camada de enlace, ou controle de acesso ao meio (MAC). Cada definição de camada PHY conta com especificações a respeito das técnicas de modulação a serem utilizadas, das bandas de frequência compatíveis e das taxas de transferência permitidas, além de definir a quantidade de canais disponíveis, sua largura e o espaçamento entre eles (cada canal representando uma pequena faixa de frequências, dentro do espectro da banda à qual pertence). A arquitetura das camadas superiores é deferida aos diversos protocolos que implementam o IEEE 802.15.4 como, por exemplo, 6LoWPAN \cite{Montenegro2007}, ZigBee \cite{ZigBee2005} e WirelessHART \cite{Kim2008}.
 
-O padrão IEEE 802.15.4 define dois tipos de nodos: dispositivos com funcionalidade completa (\textit{full-functioning device}, ou FFD) e dispositivos com funcionalidade reduzida (\textit{reduced-function device}, ou RFD). RFDs são dispositivos dotados de menor capacidade de processamento e memória, localizados nas extremidades das redes e cuja funcionalidade se resume a estabelecer comunicação com algum FFD. Já os FFDs são dispositivos com maior capacidade embarcada de processamento e capazes de implementar completamente o padrão, são responsáveis por coordenar as atividades de comunicação e roteamento. Também é definido no IEEE 802.15.4 o suporte a duas topologias de rede: estrela e \textit{peer-to-peer}. \cite{Rawat2014}. Ao utilizar a topologia estrela todos os nodos devem se comunicar com um dispositivo controlador central, do tipo FFD. Já através da topologia \textit{peer-to-peer} é possível estabelecer links de comunicação entre dois nodos quaisquer, o que permite que se produzam rede mais complexas, como por exemplo redes \textit{mesh}, onde diversos nodos dispostos de forma potencialmente irregular colaboram para estabelecer rotas de comunicação entre si, mesmo que não sejam capazes de se comunicar diretamente.
+O padrão IEEE 802.15.4 define dois tipos de nodos: dispositivos com funcionalidade completa (\textit{full-functioning device}, ou FFD) e dispositivos com funcionalidade reduzida (\textit{reduced-function device}, ou RFD). RFDs são dispositivos dotados de menor capacidade de processamento e memória, localizados nas extremidades das redes e cuja funcionalidade pode se resumir a estabelecer comunicação com algum FFD. Já os FFDs são dispositivos com maior capacidade de processamento e memória, capazes de implementar completamente o padrão, são responsáveis por coordenar as atividades de comunicação e roteamento. O IEEE 802.15.4 define ainda o suporte a duas topologias de rede: estrela e \textit{peer-to-peer}. Ao utilizar a topologia estrela todos os nodos devem se comunicar com um dispositivo controlador central, do tipo FFD. Já através da topologia \textit{peer-to-peer} é possível estabelecer links de comunicação entre dois nodos quaisquer, o que permite que se estruturem redes mais complexas, como por exemplo redes \textit{mesh}, onde diversos nodos dispostos de forma potencialmente irregular colaboram para estabelecer rotas de comunicação entre si, mesmo que não sejam capazes de se comunicar diretamente.
 
-A versão original do padrão, IEEE 802.15.4-2003 \cite{IEEE2003}, propõe somente duas definições para a camada PHY, permitindo a operação nas faixas de 868 MHz e 915 MHz (através da modulação BPSK, com taxa máxima de transferência de 40 kbps), e na faixa de 2.4 GHz (através da modulação O-QPSK, com taxa máxima de transferência de 250kbps). No entanto, devido à sua crescente popularidade, ao longo do tempo diversas revisões e emendas foram adicionadas ao padrão, tendo como objetivo expandir as funcionalidades originalmente previstas pela camada MAC e, com maior frequência, agregar novas definições de camadas PHY.
+A versão original do padrão, IEEE 802.15.4-2003 \cite{IEEE2003}, propõe somente duas definições para a camada PHY, permitindo a operação nas bandas de 868 MHz e 915 MHz (através da modulação BPSK, com taxa máxima de transferência de 40 kbps), e na banda de 2.4 GHz (através da modulação O-QPSK, com taxa máxima de transferência de 250kbps). No entanto, devido à sua crescente popularidade, ao longo do tempo diversas revisões e emendas foram adicionadas a este padrão, tendo como objetivo expandir as funcionalidades originalmente previstas pela camada MAC e, com maior frequência, agregar novas definições de camadas PHY.
 
-A primeira revisão aprovada do padrão, publicada como IEEE 802.15.4-2006 \cite{IEEE2006}, ocorreu três anos após a aprovação da versão original. Esta revisão teve como objetivo a incorporação de suporte à duas novas definições para a camada PHY, a fim de permitir a utilização de taxas de transferência mais elevadas nas bandas de frequência de 868 MHz e 915 MHz. Tal aperfeiçoamento foi possível através da utilização das modulações O-QPSK e ASK que permitem, neste caso, a operação à taxas de 100 kbps e 250 kbps respectivamente. Ainda nesta revisão foram adicionadas definições para mecanismos de segurança e outros aprimoramentos na camada MAC, como o suporte para uma base de tempo compartilhada, agendamento do envio de \textit{beacons} e a sincronização de mensagens de \textit{broadcast}.
+A primeira revisão aprovada deste padrão, publicada sob o título IEEE 802.15.4-2006 \cite{IEEE2006}, ocorreu três anos após a aprovação de sua versão original. Esta revisão teve como objetivo a incorporação de suporte à duas novas definições para a camada PHY, a fim de permitir a utilização de taxas de transferência mais elevadas nas bandas de 868 MHz e 915 MHz. Tal aprimoramento se deu através da inclusão de suporte opcional para utilização das técnicas de modulação O-QPSK e ASK nas referidas bandas de frequência, o que possibilitou a obtenção de taxas de transferência equivalentes a 100 kbps e 250 kbps respectivamente. Ainda nesta revisão foram adicionadas definições de mecanismos de segurança e novas funcionalidades à camada MAC, como o suporte para uma base de tempo compartilhada, agendamento do envio de \textit{beacons} e a sincronização de mensagens de \textit{broadcast}.
 
-Apenas um ano após a aprovação desta revisão foi proposta sua primeira emenda, dando origem ao IEEE 802.15.4a \cite{IEEE2007}. Através desta emenda foram incorporadas mais duas especificações PHY opcionais: o \textit{Chirp Spread Spectrum} (CSS), capaz de elevar a taxa de transferência na faixa de 2450 MHz para 1000 kbps, e a Ultra-wide Band (UWB) destinada à operação nas faixs de 3 GHz, 5 GHz e 6 GHz a 10 GHz e capaz de fornecer taxas de transferência de até 27.4 Mbps.
+Apenas um ano após a aprovação desta revisão foi proposta sua primeira emenda, dando origem ao IEEE 802.15.4a \cite{IEEE2007}. Através desta emenda foram incorporadas mais duas especificações PHY opcionais: o \textit{Chirp Spread Spectrum} (CSS), capaz de elevar a taxa de transferência na faixa de 2450 MHz para 1000 kbps, e a Ultra-wide Band (UWB) destinada à operação nas faixs de 3 GHz, 5 GHz e 6 GHz a 10 GHz, capaz de fornecer taxas de transferência de até 27.4 Mbps.
 
 \begin{table}[b!]
 	\centering
@@ -702,79 +703,83 @@ Apenas um ano após a aprovação desta revisão foi proposta sua primeira emend
 	\legend{Fonte: elaboração prórpia.}
 \end{table}
 
-Em se tratando de padronização dos meios de difusão via radiofrequência, o maior empecilho encontrado está relacionado às divergências presentes nas regulamentações locais existentes em cada país. A alocação de bandas de frequência pode variar de acordo com as leis de cada país, exigindo certa flexibilidade dos padrões que visem obter permissão para operar globalmente. No caso do IEEE 802.15.4, as definições de camada PHY são destinadas à operação nas bandas ISM (\textit{Industrial, Scientific an Medical}), bandas de frequência internacionalmente reservadas para fins industriais, científicos e médicos, não necessariamente relacionados à transmissão de dados e que, por este motivo, apresentam menor variabilidade quanto as bandas de frequência alocadas nas diferentes regiões do planeta. Adicionalmente, devido à finalidade para qual são destinadas, as regulamentações que incidem sobre as bandas ISM tendem a ser mais permissivas quanto à irradiação não licenciada.
+Ainda com o intuito de possibilitar maior abrangência geográfica ao padrão, apenas dois anos após a aprovação da emenda IEEE 802.15.4a, foram introduzidas as emendas IEEE 802.15.4c \cite{IEEE802_15_4c} e IEEE 802.15.4d \cite{IEEE802_15_4d}, destinadas a introduzir novas definições para a camada PHY, compatíveis com a operação nas bandas de frequência disponíveis na China e no Japão. IEEE 802.15.4c introduz definições para operação na banda de frequência de 780 MHz, assim como adequações na camada MAC a fim de compatibilizar o padrão com as regulamentações vigentes na China, na época de sua publicação. Já o IEEE 802.15.4d define suporte à operação na banda de 950 MHz assim como adequações necessárias na camada MAC a fim de permitir a operação de acordo com as regulamentações vigentes no Japão, na época de sua publicação. Estas duas emendas foram inclusas na revisão seguinte, o IEEE 802.15.4-2011 \cite{IEEE802_15_4_2011}, cujas definições de camada PHY suportadas são apresentadas na \autoref{tab_ieee_802_15_4_2011}.
 
-O sinal de transmissão associado ao PHY \textit{Ultra-wide Band} (UWB) possui ocupação espectral instantânea superior a 500 MHz e largura fracionária de banda superior a 20\%, o que permite alta eficiência espectral e altas taxas de transferência com baixo consumo energético, além de proporcionar alta tolerância aos efeitos da propagação multi-caminho \cite{Porcino2003}. Estas características, no entanto, fazem com que UWB requeira maior largura de banda do que a disponibilizada nas faixas de frequência ISM, caracterizando-a como a única definição de camada PHY incorporada ao IEEE 802.15.4 a não ser destinada às bandas ISM. Adicionalmente, as técnicas de transmissão utilizadas por UWB baseiam-se em pulsos de rádio extremamente curtos, emitidos através de sequências periódicas, o que torna a tecnologia inadequada para utilização em ambientes perigosos, devido à emissão de pulsos de alta energia. UBW também não é adequada para transmissões de longa distância \cite{Rawat2014}.
+No entanto, em se tratando de padronização dos meios de difusão via radiofrequência, o maior empecilho encontrado está justamente relacionado às divergências presentes nas regulamentações locais existentes em cada país. À exemplo dos motivadores para as revisões IEEE 802.15.4c e IEEE 802.15.4d, a alocação de bandas de frequência pode variar de acordo com as leis de cada país, exigindo certa flexibilidade dos padrões que visem permissão para operar globalmente. No caso do IEEE 802.15.4, a grande maioria as definições de camada PHY são destinadas à operação nas bandas ISM (\textit{Industrial, Scientific an Medical}), bandas de frequência internacionalmente reservadas para fins industriais, científicos e médicos, não necessariamente relacionados à transmissão de dados e que, por este motivo, apresentam menor variabilidade quanto as bandas de frequência alocadas nas diferentes regiões do planeta. Adicionalmente, devido à finalidade para qual são destinadas, as regulamentações que incidem sobre as bandas ISM tendem a ser mais permissivas quanto à irradiação por equipamentos não licenciados.
 
-Ainda com o intuito de possibilitar maior abrangência geográfica ao padrão, apenas dois anos após a aprovação da emenda IEEE 802.15.4a, foram introduzidas as emendas IEEE 802.15.4c \cite{IEEE802_15_4c} e IEEE 802.15.4d \cite{IEEE802_15_4d}, destinadas a introduzir novas definições para a camada PHY, compatíveis com a operação nas bandas de frequência ISM disponíveis na China e no Japão. IEEE 802.15.4c introduz definições para operação nas bandas de frequência 314-316 MHz, 430-434 MHz e 779-787 MHz, assim como adequações na camada MAC a fim de compatibilizar o padrão com as regulamentação vigente à época, na China. Já o IEEE 802.15.4d define o suporte à operação na banda de 950 MHz assim como adequações necessárias na camada MAC a fim de permitir a operação de acordo com as regulamentações vigentes à época, no Japão. Estas duas emendas foram incluídas na revisão seguinte, IEEE 802.15.4-2011 \cite{IEEE802_15_4_2011}, cujas definições de camada física são apresentadas na \autoref{tab_ieee_802_15_4_2011}.
+Contudo, a partir da introdução das definições do PHY UWB, no IEEE 802.15.4-2011, houveram algumas exceções quanto à utilização de bandas de frequência fora do escopo das bandas ISM. O sinal de transmissão associado ao PHY \textit{Ultra-wide Band} (UWB) possui ocupação espectral instantânea superior a 500 MHz e largura fracionária de banda superior a 20\%, o que permite alta eficiência espectral e altas taxas de transferência com baixo consumo energético, além de proporcionar alta tolerância aos efeitos da propagação multi-caminho \cite{Porcino2003}. Estas características, no entanto, fazem com que UWB requeira maior largura de banda do que a disponibilizada nas faixas de frequência ISM. Adicionalmente, as técnicas de transmissão utilizadas pelo UWB baseiam-se em pulsos de rádio extremamente curtos, emitidos através de sequências periódicas, o que torna a tecnologia inadequada para utilização em certos ambientes de alta periculosidade, devido à emissão de pulsos de alta energia. UBW também não é adequada para transmissões de longa distância \cite{Rawat2014}.
 
-\begingroup
-\setlength{\LTleft}{-21cm plus -1fill}
-\setlength{\LTright}{\LTleft}
-\begin{longtable}{|M{3.0cm}|M{5.5cm}|M{2.5cm}|M{5.5cm}|}
-	\caption{Definições PHY do IEEE 802.15.4-2015}
-	\label{tab_ieee_802_15_4_2015_phy} \\
-	\hline
-	\endfirsthead
-	\caption{Definições PHY do IEEE 802.15.4-2015 (continuação)} \\
-	\hline		
-	\endhead
-	\hline
-	\endfoot
-	\caption*{Fonte: Elaboração prórpia}
-	\endlastfoot
-	\multicolumn{1}{|c|}{\textbf{PHY}} & \textbf{Banda de frequência (MHz)} & \textbf{Modulação} & \textbf{Taxa de transferência (kb/s)} \\ \hline
-	\multirow{2}{*}{O-QPSK} & 868 & \multirow{2}{*}{O-QPSK} & 100 \\ \cline{2-2} \cline{4-4} 
-	& 780, 915, 2380, 2450 &  & 250 \\ \hline
-	\multirow{2}{*}{BPSK} & 868 & \multirow{2}{*}{BPSK} & 20 \\ \cline{2-2} \cline{4-4} 
-	& 915 &  & 40 \\ \hline
-	ASK & 868, 915 & ASK/PSSS & 250 \\ \hline
-	CSS & 2450 & \specialcell{CSS/\\D-QPSK} & 250, 1000 \\ \hline
-	\multirow{6}{*}{HRP-UWB} & \specialcell{HRP-UWB\\(sub-gigahertz)} & \multirow{6}{*}{BPM/BPSK} & \multirow{6}{*}{110, 850, 6800, 27240} \\ \cline{2-2}
-	& \specialcell{HRP-UWB\\(low-band)} &  &  \\ \cline{2-2}
-	& \specialcell{HRP UWB\\(high-band)} &  &  \\ \hline
-	MPSK & 780 & MPSK & 250 \\ \hline
-	GFSK & 920 & GFSK & 100 \\ \hline
-	\multirow{2}{*}{MSK} & 2450 & \multirow{2}{*}{MSK} & 250 \\ \cline{2-2} \cline{4-4} 
-	& 433 &  & 31.25, 100, 250 \\ \hline
-	\multirow{2}{*}{LRP-UWB} & \multirow{2}{*}{LRP UWB} & PPM & 31.25 \\ \cline{3-4} 
-	&  & OOK & 250, 1000 \\ \hline
-	\multirow{8}{*}{SUN FSK} & \multirow{2}{*}{169} & 2-FSK & 2.4, 4.8 \\ \cline{3-4} 
-	&  & 4-FSK & 9.6 \\ \cline{2-4} 
-	& \multirow{2}{*}{450} & 2-FSK & 4.8 \\ \cline{3-4} 
-	&  & 4-FSK & 9.6 \\ \cline{2-4} 
-	& \multirow{2}{*}{470, 780, 863} & 2-FSK & 50, 100 \\ \cline{3-4} 
-	&  & 4-FSK & 200 \\ \cline{2-4} 
-	& 896, 901, 928, 1427 & \multirow{2}{*}{2-FSK} & 10, 20, 40 \\ \cline{2-2} \cline{4-4} 
-	& 915, 917, 2450 &  & 50, 150, 200 \\ \hline
-	\multirow{3}{*}{SUN OFDM} & \multirow{3}{5.5cm}{\centering 470, 780, 863, 915, 917, 920, 2450} & BPSK & 50, 100, 200 \\ \cline{3-4}
-	&  & QPSK & 50, 100, 150, 200, 300, 400, 800 \\ \cline{3-4}
-	&  & 16-QAM & 200, 300, 400, 600, 800 \\ \hline
-	\multirow{2}{*}{SUN O-QPSK} & 470, 868, 920 & \multirow{2}{*}{O-QPSK} & 6.25, 12.5, 25, 50 \\ \cline{2-2} \cline{4-4} 
-	& 780, 915, 917, 2450 &  & 31.25, 125, 250, 500 \\ \hline
-	LECIM DSSS & 470, 780, 863, 915, 922, 917, 920, 921, 2450 & \specialcell{BPSK/\\O-QPSK} & \textless 500 \\ \hline
-	\multirow{3}{*}{LECIM FSK} & 169 & \multirow{3}{*}{FSK/P-FSK} & 12.5, 25 \\ \cline{2-2} \cline{4-4} 
-	& 433, 470, 780, 863, 915, 922, 917, 920, 921 &  & 12.5, 25, 37.5 \\ \hline
-	\multirow{2}{*}{\specialcell{TVWS\\FSK}} & \multirow{2}{5.5cm}{\centering Definições regionais podem variar.} & 2-FSK & 50, 100, 200, 300 \\ \cline{3-4}
-	&  & 4-FSK & 400 \\ \hline
-	\multirow{3}{*}{\specialcell{TVWS\\OFDM}} & \multirow{3}{5.5cm}{\centering Definições regionais podem variar}. & BPSK & 390.625, 1562.5 \\ \cline{3-4}
-	&  & QPSK & 781.50, 3125 \\ \cline{3-4}
-	&  & 16-QAM & 1562.5, 6250\\ \hline
-	\multirow{4}{*}{\specialcell{TVWS\\NB-OFDM}} & \multirow{4}{5.5cm}{\centering Definições regionais  podem variar.}& BPSK & 156, 234 \\ \cline{3-4}
-	&  & QPSK & 312, 468 \\ \cline{3-4}
-	&  & 16-QAM & 624, 936 \\ \cline{3-4}
-	&  & 64-QAM & 1404, 1638 \\ \hline \pagebreak
-	\multirow{9}{*}{RCC LMR} & \multirow{4}{5.5cm}{\centering 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928} & LMR GMSK & 9.6, 19.2 \\* \cline{3-4}
-	&  & LMR 4-FSK & 9.6, 19.2, 38.4 \\* \cline{3-4}
-	&  & LMR Q-PSK & 16, 32 \\* \cline{3-4}
-	&  & LMR $\pi/4$ DQPSK & 16, 32, 36 \\ \cline{2-4}
-	& \multirow{1}{*}{915, 2450, 4965, 5800} & LMR DSSS BPSK & Opcional \\ \cline{2-4}
-	& \multirow{1}{*}{915, 4965, 5800} & LMR DSSS DPSK & Opcional \\ \hline
-	RCC DSSS & 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928, 2450, 4965, 5800 & DSSS BPSK & Baseado nas mesmas definições do PHY BPSK. \\ \hline
-\end{longtable}
-\endgroup
+\afterpage{
+	\begingroup
+		\setlength{\LTleft}{-21cm plus -1fill}
+		\setlength{\LTright}{\LTleft}
+		\begin{longtable}{|M{3.0cm}|M{5.5cm}|M{2.5cm}|M{5.5cm}|}
+			\caption{Definições PHY do IEEE 802.15.4-2015}
+			\label{tab_ieee_802_15_4_2015_phy} \\
+			\hline
+			\endfirsthead
+			\caption{Definições PHY do IEEE 802.15.4-2015 (continuação)} \\
+			\hline		
+			\endhead
+			\hline
+			\endfoot
+			\caption*{Fonte: Elaboração prórpia}
+			\endlastfoot
+			\multicolumn{1}{|c|}{\textbf{PHY}} & \textbf{Banda de frequência (MHz)} & \textbf{Modulação} & \textbf{Taxa de transferência (kb/s)} \\ \hline
+			\multirow{2}{*}{O-QPSK} & 868 & \multirow{2}{*}{O-QPSK} & 100 \\ \cline{2-2} \cline{4-4} 
+			& 780, 915, 2380, 2450 &  & 250 \\ \hline
+			\multirow{2}{*}{BPSK} & 868 & \multirow{2}{*}{BPSK} & 20 \\ \cline{2-2} \cline{4-4} 
+			& 915 &  & 40 \\ \hline
+			ASK & 868, 915 & ASK/PSSS & 250 \\ \hline
+			CSS & 2450 & \specialcell{CSS/\\D-QPSK} & 250, 1000 \\ \hline
+			\multirow{6}{*}{HRP-UWB} & \specialcell{HRP-UWB\\(sub-gigahertz)} & \multirow{6}{*}{BPM/BPSK} & \multirow{6}{*}{110, 850, 6800, 27240} \\ \cline{2-2}
+			& \specialcell{HRP-UWB\\(low-band)} &  &  \\ \cline{2-2}
+			& \specialcell{HRP UWB\\(high-band)} &  &  \\ \hline
+			MPSK & 780 & MPSK & 250 \\ \hline
+			GFSK & 920 & GFSK & 100 \\ \hline
+			\multirow{2}{*}{MSK} & 2450 & \multirow{2}{*}{MSK} & 250 \\ \cline{2-2} \cline{4-4} 
+			& 433 &  & 31.25, 100, 250 \\ \hline
+			\multirow{2}{*}{LRP-UWB} & \multirow{2}{*}{LRP UWB} & PPM & 31.25 \\ \cline{3-4} 
+			&  & OOK & 250, 1000 \\ \hline
+			\multirow{8}{*}{SUN FSK} & \multirow{2}{*}{169} & 2-FSK & 2.4, 4.8 \\ \cline{3-4} 
+			&  & 4-FSK & 9.6 \\ \cline{2-4} 
+			& \multirow{2}{*}{450} & 2-FSK & 4.8 \\ \cline{3-4} 
+			&  & 4-FSK & 9.6 \\ \cline{2-4} 
+			& \multirow{2}{*}{470, 780, 863} & 2-FSK & 50, 100 \\ \cline{3-4} 
+			&  & 4-FSK & 200 \\ \cline{2-4} 
+			& 896, 901, 928, 1427 & \multirow{2}{*}{2-FSK} & 10, 20, 40 \\ \cline{2-2} \cline{4-4} 
+			& 915, 917, 2450 &  & 50, 150, 200 \\ \hline
+			\multirow{3}{*}{SUN OFDM} & \multirow{3}{5.5cm}{\centering 470, 780, 863, 915, 917, 920, 2450} & BPSK & 50, 100, 200 \\ \cline{3-4}
+			&  & QPSK & 50, 100, 150, 200, 300, 400, 800 \\ \cline{3-4}
+			&  & 16-QAM & 200, 300, 400, 600, 800 \\ \hline
+			\multirow{2}{*}{SUN O-QPSK} & 470, 868, 920 & \multirow{2}{*}{O-QPSK} & 6.25, 12.5, 25, 50 \\ \cline{2-2} \cline{4-4} 
+			& 780, 915, 917, 2450 &  & 31.25, 125, 250, 500 \\ \hline
+			LECIM DSSS & 470, 780, 863, 915, 922, 917, 920, 921, 2450 & \specialcell{BPSK/\\O-QPSK} & \textless 500 \\ \hline
+			\multirow{3}{*}{LECIM FSK} & 169 & \multirow{3}{*}{FSK/P-FSK} & 12.5, 25 \\ \cline{2-2} \cline{4-4} 
+			& 433, 470, 780, 863, 915, 922, 917, 920, 921 &  & 12.5, 25, 37.5 \\ \hline
+			\multirow{2}{*}{\specialcell{TVWS\\FSK}} & \multirow{2}{5.5cm}{\centering Definições regionais podem variar.} & 2-FSK & 50, 100, 200, 300 \\ \cline{3-4}
+			&  & 4-FSK & 400 \\ \hline
+			\multirow{3}{*}{\specialcell{TVWS\\OFDM}} & \multirow{3}{5.5cm}{\centering Definições regionais podem variar}. & BPSK & 390.625, 1562.5 \\ \cline{3-4}
+			&  & QPSK & 781.50, 3125 \\ \cline{3-4}
+			&  & 16-QAM & 1562.5, 6250\\ \hline
+			\multirow{4}{*}{\specialcell{TVWS\\NB-OFDM}} & \multirow{4}{5.5cm}{\centering Definições regionais  podem variar.}& BPSK & 156, 234 \\ \cline{3-4}
+			&  & QPSK & 312, 468 \\ \cline{3-4}
+			&  & 16-QAM & 624, 936 \\ \cline{3-4}
+			&  & 64-QAM & 1404, 1638 \\ \hline
+			\multirow{9}{*}{RCC LMR} & \multirow{4}{5.5cm}{\centering 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928} & LMR GMSK & 9.6, 19.2 \\ \cline{3-4}
+			&  & LMR 4-FSK & 9.6, 19.2, 38.4 \\ \cline{3-4}
+			&  & LMR Q-PSK & 16, 32 \\ \cline{3-4}
+			&  & LMR $\pi/4$ DQPSK & 16, 32, 36 \\ \cline{2-4}
+			& \multirow{1}{*}{915, 2450, 4965, 5800} & LMR DSSS BPSK & Opcional \\ \cline{2-4}
+			& \multirow{1}{*}{915, 4965, 5800} & LMR DSSS DPSK & Opcional \\ \hline
+			RCC DSSS & 161, 216, 217, 220, 450, 770, 800, 806, 896, 915, 928, 2450, 4965, 5800 & DSSS BPSK & Baseado nas mesmas definições do PHY BPSK. \\ \hline
+		\end{longtable}
+	\endgroup
+}
 
-A última revisão publicada do padrão, até a presente data, foi a IEEE 802.15.4-2015 \cite{IEEE802_15_4_2015}, realizada com o intuito de introduzir as emendas propostas em IEEE 802.15.4e \cite{IEEE802_15_4e}, IEEE 802.15.4f \cite{IEEE802_15_4f} e IEEE 802.15.4g \cite{IEEE802_15_4g}. As alterações contidas nesta revisão incluem o suporte a diversas novas definições para a camada PHY e funcionalidades adicionais para a camada MAC, como novos formatos de \textit{frames}, priorização de acesso aos canais e também mecanismos para redução do consumo de energia. Existem ainda diversas propostas de emenda aguardando a publicação de uma próxima revisão. Dentre elas se destaca o IEEE 802.15.4q \cite{IEEE802_15_4q}, cujo foco é no suporte à definição de PHYs \textit{Ultra Low Power}(ULP), destinados a dispositivos de baixo consumo, alimentados por baterias e com previsão de vida útil de vários anos. Se destaca também o IEEE 802.15.4m \cite{IEEE802_15_4m}, que visa prover suporte para definições de camada PHY operando na faixa de 54 MHz a 862 MHz de forma a reaproveitar bandas antes destinadas à difusão de sinais de TV analógica e que atualmente se encontram ociosas, às que se refere como \textit{TV White Space}.
+A popularidade adquirida pelo IEEE 802.15.4 continua a motivar o surgimento de novas emendas e revisões para este padrão. Até a data em que foi conduzido este estudo a última revisão aprovada era a IEEE 802.15.4-2015 \cite{IEEE802_15_4_2015}, realizada com o intuito de introduzir as emendas propostas em IEEE 802.15.4e \cite{IEEE802_15_4e}, IEEE 802.15.4f \cite{IEEE802_15_4f} e IEEE 802.15.4g \cite{IEEE802_15_4g}. Em relação à revisão publicada em 2011, esta última versão adiciona uma variedade de novas definições para técnicas de modulação, esquemas de codificação e bandas de frequência, com o objetivo de oferecer suporte a uma variedade de aplicações como: RFID (\textit{Radio Frequency Identification}), SUNs (\textit{Smart Utility Networks}), LECIM (\textit{Low Energy Critical Infrastructure Monitoring}) e RCC (\textit{Rail Comunications and Control}), além de expandir o suporte para utilização de bandas de frequência antes destinadas à difusão de sinais de TV analógica e que atualmente encontram-se ociosas, às quais se refere como TVWS (\textit{TV White Space}). Um resumo ds definições de camada física suportados por esta revisão encontram-se na \autoref{tab_ieee_802_15_4_2015_phy}. Há ainda diversas propostas de emenda aguardando a publicação de uma próxima revisão. Dentre elas se destaca o IEEE 802.15.4q \cite{IEEE802_15_4q}, cujo foco é no suporte à definições de PHYs \textit{Ultra Low Power}(ULP), destinados a dispositivos de baixo consumo, alimentados por baterias e com previsão de vida útil de vários anos.
+
+
 
 Para que um dispositivo seja considerado compatível com o padrão IEEE 802.15.4 é necessário que forneça suporte completo a pelo menos uma das especificações das camadas PHY e MAC nele definidas. Podendo opcionalmente oferecer suporte a mais de uma especificação. A escolha de quais especificações utilizar varia, e é baseada nas necessidades específicas de cada aplicação.
 
@@ -783,31 +788,13 @@ Para que um dispositivo seja considerado compatível com o padrão IEEE 802.15.4
 \begin{center}
 	\textbf{--- Texto em elaboração - INÍCIO ---}
 \end{center}
-A norma IEEE 802.15.4 \cite{IEEE2003}, define um protocolo de comunicação e parâmetros de implementação da camada física para interconexão de dispositivos via radiofrequência em redes de área pessoal sem fio com baixas taxas de transmissão (LR-WPANs). Esta norma é base para alguns dos protocolos mais disseminados na indústria como ZigBee \cite{bibid}, 6LowPAN \cite{bibid}, WirelessHART \cite{bibid}, MiWi \cite{bibid} entre outros. A norma original, publicada em 2003, propunha apenas duas implementações distintas para a camada física (PHY), sendo a primeira destinada à operação nas bandas de 868 MHz e 915 MHz utilizando modulação BPSK e a segunda na banda de 2450 MHz, através da modulação O-QPSK. Desde sua publicação original, no entanto, esta norma recebeu diversas emendas e revisões, através das quais foram adicionados novos PHYs e realizadas alterações nos protocolos de comunicação. 
+Dispositivos compatíveis devem implementar por completo ao menos um PHY, podendo opcionalmente ser compatíveis com múltiplos PHYs.
 
-Dispositivos compatíveis devem implementar por completo ao menos um PHY, podendo opcionalmente ser compatíveis com múltiplos PHYs. A seleção dos PHYs a serem utilizados, no entanto, fica a cargo das regulamentações locais e preferências do usuário. Em sua última versão, IEEE 802.15.4-2015 \cite{IEEE2016}, há dezenove PHYs, capazes de operar em bandas de frequência que variam entre 169 MHz e cerca de 9 GHz. A grande diversidade de  implementações prevista pela norma faz com que frequentemente as legislações vigentes em cada país sejam compatíveis, simultaneamente, com diversas delas.
+A grande diversidade de  implementações prevista pela norma faz com que frequentemente as legislações vigentes em cada país sejam compatíveis, simultaneamente, com diversas delas.
  % ---
-Cada PHY define uma modulação específica, taxas de transferência distintas e um certo número de canais para cada banda de frequência suportada. Sendo que cada canal representa uma pequena faixa de frequência dentro do espectro da banda a qual pertence. A quantidade de canais disponíveis em cada PHY pode variar, de acordo com a largura de banda dedicada a cada um deles. 
+
 
 A seleção do método de acesso ao meio físico na norma IEEE 802.15.4 é realizada através de um identificador único de 32 bits, composto por um número de página (armazenado nos 5 bits mais altos) e um número de canal (27 bits restantes). Esta arquitetura foi introduzida com o intuito de permitir a declaração de novos PHYs a medida que fossem realizadas novas revisões do protocolo. 
-
-\begin{center}
-	\textbf{--- Texto em elaboração - FIM ---}
-\end{center}
-
-% ---
-
-\section{Discussão}
-
-\begin{center}
-	\textbf{--- Texto em elaboração - INÍCIO ---}
-\end{center}
-
-Motes are equipped with a low-rate (10–100 kbps) and short-range (less than 100 m) wireless radio, e.g., IEEE 802.15.4 radio to communicate among themselves. 
-Since radio communication consumes most of the power, the radio must incorporate energy-efficient communication techniques.
-The power source commonly used is rechargeable batteries.
-Since motes can be deployed in remote and hostile environments they must use little power and must employ built-in mechanisms to extend network lifetime.
-For example, motes may be equipped with effective power harvesting methods, such as solar cells, so they may be left unattended for years \cite{Rawat2014}.
 
 Devido às restrições na complexidade, no consumo energético e nos custos de produção, os transmissores de rádio utilizados para este fim geralmente operam com baixa potência e pequenas taxas de transmissão. Isso faz com que os links estabelecidos se tornem bastante susceptíveis à variações intermitentes de qualidade, especialmente nos casos em que compartilham sua banda de frequência com outros sistemas mais bem difundidos. Como é o caso da disputada faixa de 2.4GHz, na qual também estão outras tecnologias bem difundidas como WiFi e Bluetooth.
 
@@ -815,13 +802,7 @@ Devido às restrições na complexidade, no consumo energético e nos custos de 
 	\textbf{--- Texto em elaboração - FIM ---}
 \end{center}
 
-\chapter{Trabalhos relacionados}
-
-\begin{center}
-	\textbf{--- Seção em elaboração ---}
-\end{center}
-
-\section{Diversidade de interfaces}
+\chapter{Diversidade de interfaces}
 
 Nas seções anteriores foram discutidos os obstáculos impostos às redes de sensores sem fios devido à instabilidade característica dos links de comunicação. Foram introduzidos mecanismos capazes de estimar a qualidade destes links e também protocolos de roteamento que, com auxílio destes mecanismos, são capazes de operar de foram mais eficiente neste ambiente. No entanto, estes mecanismos e protocolos têm uma deficiência em comum: não são capazes de melhorar efetivamente a qualidade dos links de comunicação, ao invés disso se limitam a prover diferentes meios para que os links disponíveis sejam melhor utilizados num ambiente inerentemente instável. De fato, nenhum mecanismo baseado puramente em software será capaz de fazê-lo, uma vez que são as caraterísticas físicas dos meios de transmissão que têm maior impacto sobre a estabilidade destes links.
 
@@ -847,13 +828,7 @@ A principal conclusão dos autores foi que deve haver compatibilidade entre as i
 
 Adicionalmente, os autores afirmam que a calibração adequada de certos parâmetros dos protocolos de comunicação como, por exemplo, tamanho dos pacotes e intervalos de transmissão pode resultar em expressiva economia de energia.
 
-\section{Estimativa de qualidade dos links}
-
-\begin{center}
-	\textbf{--- Seção em elaboração ---}
-\end{center}
-
-\section{Discussão}
+\chapter{Estimativa de qualidade dos links}
 
 \begin{center}
 	\textbf{--- Seção em elaboração ---}

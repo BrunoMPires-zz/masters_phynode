@@ -361,7 +361,7 @@
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}
  
- Redes de sensores sem fios possibilitam o monitoramento dos mais diversos fenômenos e processos, além de abrir caminho para a criação de uma nova geração de sistemas inteligentes, dinâmicos e interconectados. A diversidade das aplicações as quais se destinam estes sistemas, no entanto, impõe uma série de restrições de projeto, o que favorece iniciativas de desenvolvimento orientadas à aplicação. Embora esta abordagem leve à criação de soluções eficazes para aplicações específicas, estabelece um padrão de desenvolvimento restrito e desconsidera possibilidades de otimização mais abrangentes. Atualmente existem iniciativas de padronização para esta categoria de sistemas, como é o caso do IEEE 802.15.4, no entanto ainda restam questões não resolvidas, comuns à maioria das redes de sensores sem fios, como é o caso da instabilidade dos links de rádio de baixa potência, frequentemente utilizados para implementação dos sistemas de comunicação. Este trabalho tem como objetivo utilizar mecanismos disponibilizados por padrões bem estabelecidos como o IEEE 802.15.4 para mitigar os problemas de instabilidade relacionados aos links de comunicação nas redes de sensores sem fios, criando uma plataforma de implementação robusta e versátil, alinhada com os processos de padronização que atualmente se intensificam nesta área. Este trabalho apresenta uma proposta para a arquitetura dos nodos de sensores sem fios, a qual busca complementar o modelo genérico comumente utilizado, através da adição de suporte à diversidade de interfaces. Também é introduzida uma proposta de extensão para a camada MAC do padrão IEEE 802.15.4, capaz de abstrair as particularidades relacionadas à transmissão de dados em nodos dotados de múltiplas interfaces de comunicação. A fim de validar as propostas realizadas, são descritos e executados experimentos utilizando protótipos reais, construídos com base na arquitetura sugerida anteriormente. Os resultados obtidos demonstram que a grande variedade de interfaces disponibilizada pelo IEEE 802.15.4 é suficiente para implementação de sistemas de comunicação robustos, baseados na técnica de diversidade de interfaces. Também conclui-se que há informações suficientes para prever de forma estável a qualidade dos links de comunicação a partir de indicadores provenientes das camadas inferiores da pilha de protocolos. Por fim constata-se que através da utilização de algoritmos de estimativa de qualidade dos links em conjunto com técnicas de diversidade de interfaces pode-se obter links de comunicação mais robustos, com baixo \textit{overhead} energético.
+ Redes de sensores sem fios possibilitam o monitoramento dos mais diversos fenômenos e processos, além de abrir caminho para a criação de uma nova geração de dispositivos inteligentes, dinâmicos e interconectados. A diversidade das aplicações as quais se destinam estes sistemas, no entanto, impõe uma série de restrições de projeto, o que favorece iniciativas de desenvolvimento orientadas à aplicação. Embora esta abordagem leve à criação de soluções eficazes para aplicações específicas, estabelece um padrão de desenvolvimento restrito e desconsidera possibilidades de otimização mais abrangentes. Atualmente existem iniciativas de padronização bastante ativas para esta categoria de sistemas, como é o caso do IEEE 802.15.4, no entanto ainda restam questões não resolvidas, comuns à maioria das redes de sensores sem fios, como é o caso da instabilidade inerente aos links de rádio de baixa potência. Este trabalho tem como objetivo utilizar mecanismos disponibilizados por padrões bem estabelecidos como o IEEE 802.15.4 para mitigar os problemas de instabilidade relacionados aos links de comunicação nas redes de sensores sem fios, criando uma plataforma de desenvolvimento robusta e versátil, alinhada com os esforços de de padronização que se encontram em andamento. Este trabalho apresenta uma proposta para a arquitetura de nodos de sensores sem fios, a qual busca complementar o modelo genérico comumente utilizado, através da adição de suporte à diversidade de interfaces. Também é introduzida uma proposta de extensão para a camada MAC do padrão IEEE 802.15.4, capaz de abstrair as particularidades relacionadas à transmissão de dados em nodos dotados de múltiplas interfaces de comunicação. A fim de validar as propostas realizadas, são descritos e executados experimentos utilizando protótipos reais, construídos com base na arquitetura sugerida anteriormente. Os resultados obtidos demonstram que a grande variedade de interfaces disponibilizada pelo IEEE 802.15.4 é suficiente para implementação de sistemas de comunicação robustos, baseados na técnica de diversidade de interfaces. Também conclui-se que as camadas inferiores da pilha de protocolos são capazes de fornecer informações suficientes para que se possa prever com precisão razoável a qualidade dos links de comunicação. Por fim constata-se que através da utilização de algoritmos de estimativa de qualidade dos links em conjunto com técnicas de diversidade de interfaces pode-se obter links de comunicação mais robustos, com baixo \textit{overhead} energético.
  
   
 
@@ -371,7 +371,7 @@
 % resumo em inglês
 \begin{resumo}[Abstract]
  \begin{otherlanguage*}{english}
-   Wireless Sensor Networks enable the monitoring of various process and fenomena, and also lead the way to the creation of a new generation of smart, dynamic and interconected systems. The greate diversity of applications to which these systems are intended for, however, put several constraints on it's projects, motivating the use of application oriented solutions. Though this approach might lead to effective solutions for targeted applications, it ignores wider optimization possibilities. At present there are some standardization efforts going on for low-power sensor networks, like IEEE 802.15.4, however there are still unresolved questions, common to the vast majority of the wireless sensor networks, like the unstability of low power links frequently used to implement comunication systems. This paper has the objetive of providing the means to mitigate link unstability problems related to commom wireless sensor networks communication systems, by utilizing mechanisms provided by well stablished standards, like IEEE 802.15.4, to create a robust and flexible development platofrm, aligned with the standardization processeces that now intensifies for this area. This paper proposes a wireless sensor node architecutre that intends to complement the generic model by adding suport to interface diversity. It also proposes an amendment to IEEE 802.15.4 MAC layer, adding the capabilities needed to handle interface diversity specifics. In order to validate the previously made proposals, prototipes based on the sugested architecture were built and real-life experiments were conducted. The results indicate firstly that the great number of interfaces supported by IEEE 802.15.4 is enough to allow for the use of frequency based interface diversity technics. It's also possible to conclude that the lower layers of the protocol stack are able to provide enough information to preditc link quality with reasonable accuracy. Finally we conclude that through the use link quality estimation algorithms  in conjunction with interface diversity techniques it's possible to attain more robust communication links, without incurring in great power consumption overhead.
+   Wireless Sensor Networks enable the monitoring of various process and fenomena, also leading the way to the creation of a new generation of smart, dynamic and interconected devices. The great diversity of applications to which these systems are intended for, however, put several constraints on it's projects, motivating the use of application oriented solutions. Though this approach might lead to effective solutions for targeted applications, it also ignores wider optimization possibilities. Currently there are some very active  ongoing standardization efforts related to low-power wireless sensor networks, like the IEEE 802.15.4 standard, however there are still unresolved issues, common to the vast majority of these systems like, for example, the inherent unstability of low power wireless comunication links. This paper's main goal is to provide solutions to mitigate link stability  issues related to most of the common wireless sensor network's radio communication systems. By utilizing mechanisms provided by well established standards, like IEEE 802.15.4, a robust and flexible development platform, aligned with the ongoing standardization processes, will be created. This paper proposes a wireless sensor node architecture that intends to complement most common generic models by adding suport to interface diversity. It also proposes an amendment to IEEE 802.15.4 MAC layer, by adding the capabilities needed to handle interface diversity specifics. In order to validate the previously made proposals, prototipes based on the sugested architecture were built and real-life experiments were conducted. The results indicate firstly that the great number of interfaces supported by IEEE 802.15.4 is enough to allow for the use of frequency based interface diversity technics. It's also possible to conclude that the lower layers of the protocol stack are able to provide enough information to predict link quality with reasonable accuracy. Finally we conclude that through the use link quality estimation algorithms  in conjunction with interface diversity techniques it's possible to attain more robust communication links, without incurring in great power consumption overhead.
 
    \vspace{\onelineskip}
  
@@ -462,14 +462,13 @@ Mais especificamente, a solução proposta será dividida em dois segmentos prin
 É interessante que soluções desta natureza sejam desenvolvidas, tendo como objetivo incentivar o processo de massificação do uso de sistemas baseados em redes de sensores sem fios. Uma vez que à medida que esta tecnologia seja incorporada a um número maior de produtos e disponibilizada aos consumidores finais, se tornará essencial que seja capaz de operar de forma confiável em diferentes ambientes e através da utilização de topologias de rede bastante diversificadas. No entanto a maior parte das redes de sensores sem fios é, atualmente, utilizada em pesquisas científicas com fins exploratórios, permitindo que cada projeto seja realizado considerando-se ambientes e aplicações específicos. Este paradigma, não é adequado para as aplicações comerciais, destinadas à produção em massa, que se beneficiam de projetos mais flexíveis, possibilitando a produção em larga escala e posteriormente sendo capazes de adaptar-se a diferentes aplicações.
 
 \section{Organização do texto}
-
-Com o objetivo de prover o hardware necessário para permitir a validação experimental das soluções propostas será introduzida, na seção \ref{phynode}, a plataforma PhyNode. A abordagem utilizada em sua construção visa contribuir para o estado da arte das pesquisas na área, pois complementa outras soluções já presentes na literatura \cite{Pantazis2013, Tarique2009} porém, em grande parte, destinadas exclusivamente a ambientes de rede \textit{mesh} densamente populados e redundantes, além de não dedicarem atenção especial às possibilidades proporcionadas pela utilização de hardware especificamente destinado à manutenção de links de comunicação mais robustos.
+Este trabalho está organizado da seguinte forma: inicialmente, no capítuloo \ref{chap_fund_teor}, serão apresentados os elementos teóricos básicos necessários para situar o leitor a respeito dos conceitos utilizados mais adiante, assim como permitir que se compreendam as motivações para realização deste trabalho. No capítulo \ref{chap_div_int} será apresentado detalhadamente o conceito de diversidade de interfaces, além de uma breve análise de outros trabalhos relacionados. O capítulo seguinte, \ref{chap_ieee}, será dedicado à apresentação do padrão IEEE 802.15.4, no qual serão baseadas as soluções apresentadas nos capítulos seguintes. No capítulo \ref{phynode} será introduzida a arquitetura PhyNode, proposta para extensão do modelo genérico de nodos de sensores sem fios. Neste mesmo capítulo serão descritos os protótipos confeccionados para avaliação experimental das propostas realizadas por PhyNode e DiversityMAC. No capítulo \ref{phymac} serão apresentadas propostas de extensão à camada MAC do padrão IEEE 802.15.4, com o objetivo de prover suporte para a diversidade de interfaces, como implementada em PhyNode (\ref{phynode}). Então no capítulo \ref{chap_exp} serão apresentados os procedimentos de teste e resultados obtidos nos experimentos realizados com a plataforma PhyNode. Por fim no capítulo \ref{chap_concl} serão apresentadas as conclusões que puderem ser obtidas através do desenvolvimento do presente trabalho.
 % ---
 
 % ---
 % Fundamentação teórica e trabalhos relacionados
 % ---
-\chapter{Fundamentação teórica}
+\chapter{Fundamentação teórica}\label{chap_fund_teor}
 A fim de embasar as discussões apresentadas ao longo deste trabalho, esta seção será dedicada a apresentar os diversos conceitos que serão futuramente utilizados, começando pela própria arquitetura associada às redes de sensores sem fios. Estes sistemas são definidos como redes compostas por um conjunto de nodos de sensores (também conhecidos como \textit{motes}), capazes de estabelecer uma infraestrutura de comunicação de forma \textit{ad-hoc}, e utiliza-la para coletar e transmitir dados obtidos a partir dos sensores presentes em cada nodo. Podem contar ainda com um ou mais \textit{sinks}, responsáveis por concentrar a coleta dos dados obtidos, além de \textit{gateways}, responsáveis por fazer a ponte entre os nodos que compõem a rede e o exterior, disponibilizando os dados coletados a uma rede local ou transmitindo-os diretamente para a internet. A arquitetura ilustrada na \autoref{fig_node_generic} será considerada daqui em diante como o modelo básico de um nodo de sensores sem fio. 
 
 \begin{figure}[htb]
@@ -633,7 +632,7 @@ Os mecanismos baseados em software provêm informações a respeito do link a pa
 	\item \textit{Métricas baseadas em pontuação.} Existem ainda métricas que apresentam seus resultados através de escalas definidas arbitrariamente, expressas por valores adimensionais, sem que estejam necessariamente relacionados com algum fenômeno físico \cite{Baccour2012}.
 \end{itemize}
 
-\chapter{Diversidade de interfaces}
+\chapter{Diversidade de interfaces} \label{chap_div_int}
 
 Nos capítulos anteriores foram discutidos os obstáculos impostos às redes de sensores sem fios devido à instabilidade característica dos links de comunicação. Foram introduzidos mecanismos capazes de estimar a qualidade destes links e também protocolos de roteamento que, com auxílio destes mecanismos, são capazes de operar de foram mais eficiente. No entanto, estes mecanismos e protocolos têm uma deficiência em comum: não são capazes de melhorar efetivamente a qualidade dos links de comunicação, ao invés disso se limitam a prover diferentes meios para que os links disponíveis sejam melhor utilizados mesmo que estejam operando com baixa qualidade (geralmente visando reduzir o custo energético das operações de comunicação). De fato, nenhum mecanismo baseado puramente em software será capaz de melhorar efetivamente a qualidade dos links, uma vez que são as caraterísticas físicas dos meios de transmissão que exercem maior influência sobre a qualidade e a estabilidade dos mesmos.
 
@@ -662,7 +661,7 @@ As aplicações às quais se destinam as redes de sensores sem fios atualmente j
 
 A principal conclusão dos autores foi que deve haver compatibilidade entre as interfaces de comunicação e o processador. No caso da plataforma experimental proposta, o rádio 802.11 utilizado era capaz de uma taxa de transferência muito mais elevada do que o transmissor 802.15.4 (11Mbps versus 250Kbps) e também era muito mais eficiente em termos de consumo durante a transmissão  de dados (112 nJ/bit versus 979 nJ/bit). No entanto, o \textit{overhead} causado pela complexidade do barramento que o conectava ao processador, e uma rotina de inicialização demasiadamente complexa, tornaram o custo ponderado para sua utilização muito mais elevado do que aquele para utilização do rádio 802.15.4. Adicionalmente, os autores afirmam que a calibração adequada de certos parâmetros dos protocolos de comunicação como, por exemplo, tamanho dos pacotes e intervalos de transmissão pode resultar em expressiva economia de energia.
 
-\chapter{O padrão IEEE 802.15.4}
+\chapter{O padrão IEEE 802.15.4} \label{chap_ieee}
 
 Como citado anteriormente, a grande diversidade de aplicações às quais se destinam as redes de sensores sem fios gera a demanda por tecnologias de comunicação bastante diversificadas. No entanto a propagação tardia desta tecnologia à segmentos de mercado que permitissem sua utilização em larga escala favoreceu a disseminação de uma grande quantidade de protocolos de escopo pouco abrangente, destinados à aplicações específicas e que, consequentemente, recebiam poucas revisões e aprimoramentos. Nestas condições frequentemente tornava-se mais vantajoso iniciar o desenvolvimento de um novo protocolo do que buscar alternativas suficientemente maduras para integração à soluções finais. Desenvolveu-se de forma semelhante o hardware utilizado para a implementação destes sistemas, o qual costumava ser até recentemente baseado em componentes de uso geral ou originalmente destinados à outras aplicações. Fato este que se devia principalmente à pouca demanda existente para componentes especificamente destinados aos requisitos das redes de sensores sem fios, e que não justificava o esforço de fabricantes para projetar e disponibilizar soluções específicas ao mercado. O projeto e a produção de componentes desta natureza requer processos industriais de alta complexidade, que se tornam financeiramente viáveis somente em maior escala, impossibilitando o obtenção de componentes customizados com o objetivo de integrar somente soluções experimentais ou outras implementações de pequena escala.
 
@@ -805,25 +804,6 @@ A popularidade adquirida pelo IEEE 802.15.4 continua a motivar o surgimento de n
 
 
 Para que um dispositivo seja considerado compatível com o padrão IEEE 802.15.4 é necessário que forneça suporte completo a pelo menos uma das especificações das camadas PHY e MAC nele definidas. Podendo opcionalmente oferecer suporte a mais de uma especificação. A escolha de quais especificações utilizar varia, e é baseada nas necessidades específicas de cada aplicação.
-
-%---
-% Not edited
-\begin{center}
-	\textbf{--- Texto em elaboração - INÍCIO ---}
-\end{center}
-Dispositivos compatíveis devem implementar por completo ao menos um PHY, podendo opcionalmente ser compatíveis com múltiplos PHYs.
-
-A grande diversidade de  implementações prevista pela norma faz com que frequentemente as legislações vigentes em cada país sejam compatíveis, simultaneamente, com diversas delas.
- % ---
-
-
-A seleção do método de acesso ao meio físico na norma IEEE 802.15.4 é realizada através de um identificador único de 32 bits, composto por um número de página (armazenado nos 5 bits mais altos) e um número de canal (27 bits restantes). Esta arquitetura foi introduzida com o intuito de permitir a declaração de novos PHYs a medida que fossem realizadas novas revisões do protocolo. 
-
-Devido às restrições na complexidade, no consumo energético e nos custos de produção, os transmissores de rádio utilizados para este fim geralmente operam com baixa potência e pequenas taxas de transmissão. Isso faz com que os links estabelecidos se tornem bastante susceptíveis à variações intermitentes de qualidade, especialmente nos casos em que compartilham sua banda de frequência com outros sistemas mais bem difundidos. Como é o caso da disputada faixa de 2.4GHz, na qual também estão outras tecnologias bem difundidas como WiFi e Bluetooth.
-
-\begin{center}
-	\textbf{--- Texto em elaboração - FIM ---}
-\end{center}
 
 % ---
 % Materiais e Métodos
@@ -1020,7 +1000,7 @@ A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite
 	\textbf{--- Seção em elaboração ---}
 \end{center}
 
-\chapter{DivMAC} \label{phymac}
+\chapter{DiversityMAC} \label{phymac}
 % TODO PhyMAC
 
 \begin{center}
@@ -1030,7 +1010,7 @@ A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite
 % ---
 % Resultados
 % ---
-\chapter{Avaliação experimental}
+\chapter{Avaliação experimental} \label{chap_exp}
 % TODO Avaliação experimental
 
 \begin{center}
@@ -1047,7 +1027,7 @@ A plataforma PhyNode inclui três \textit{transceivers}, sendo dois CC1201 \cite
 % ---
 % Conclusão
 % ---
-\chapter{Conclusão}
+\chapter{Conclusão} \label{chap_concl}
 % TODO - Conclusão
 
 \begin{center}

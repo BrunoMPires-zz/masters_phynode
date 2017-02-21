@@ -922,7 +922,7 @@ Para que o algoritmo empregado por PhyMAC seja capaz de realizar sua funções d
 
 A fim de tornar PhyMAC diretamente compatível com os protocolos que implementam o padrão IEEE 802.15.4 buscou-se utilizar, em seu processo de implementação, somente dados provenientes das camadas PHY e MAC. Fator que guiou a seleção do algoritmo de estimativa de qualidade utilizado. Na literatura existem diversas propostas de estimadores de qualidade capazes de prever o comportamento de um link com a estabilidade e reatividade requeridas por PhyMAC, no entanto o estimador proposto em \citeonline{Boano2010}, ao qual se deu o nome de \textit{Triangle}, foi o que se demonstrou mais adequado. \textit{Triangle} é uma métrica baseada nos valores de PRR, SNR e LQI, que considera um histórico de tamanho configurável e deve calculada a cada pacote recebido, resulta em um valor adimensional diretamente proporcional à qualidade esperada do link.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
 	\centering
 	\caption{Algoritmo de seleção PhyMAC - \textit{Triangle}}
 	\label{fig_phymac_trng}
@@ -963,16 +963,15 @@ Foi definido um formato específico de \textit{Information Element} utilizado po
 
 O processo de sincronização entre receptor e transmissor, ilustrado na \autoref{fig_phymac_txrx}, é baseado na troca de IEs entre nodos situados em extremidades opostas de um link. Estes IEs são gerados todas as vezes  em que ocorre alguma mudança na saída dos algoritmos de seleção, e aguardam até que pacotes de dados com destino à outra extremidade do link entrem na fila de transmissão, quando são então adicionados ao \textit{frame} destes pacotes e enviados. Também são enviados, periodicamente, \textit{beacons} de sincronização, que são \textit{beacons} enviados simultaneamente através de todas as interfaces disponíveis, especificamente com o intuito de manter os algoritmos de seleção atualizados. Este processo evita que algum \textit{link} seja esquecido definitivamente após ser desativado uma vez. A recepção de um \textit{beacon} de sincronização força seu receptor a emitir imediatamente um \textit{frame} do tipo \textit{Enhanced Ack}, contendo um IE com a seleção mais atual.
 
-
-Adicionalmente, o processo de troca de \textit{beacons} de sincronização tem o objetivo de melhorar a acuracidade do LQE \textit{Triangle}, da forma como foi implementado em PhyMAC. O algoritmo original só computa um resultado quando um pacote é recebido com sucesso. Desta forma, no caso de um link com PRR muito baixa, pode demorar para ser atualizado, fornecendo leituras falsamente elevadas. Em PhyMAC, quando um \textit{beacon} de sincronização é recebido o PRR de todos os \textit{links} é atualizado (inclusive dos links através dos quais o \textit{beacon} não foi recebido corretamente), forçando uma atualização da métrica.
-
-\begin{figure}[t]
+\begin{figure}[htb]
 	\centering
 	\caption{Algoritmo de seleção PhyMAC - Transmissor}
 	\label{fig_phymac_tx}
-	\includegraphics[width=\linewidth]{PhyMAC_Seletor}
+	\includegraphics[width=.99\linewidth]{PhyMAC_Seletor}
 	\legend{Fonte: Elaboração própria}
 \end{figure}
+
+Adicionalmente, o processo de troca de \textit{beacons} de sincronização tem o objetivo de melhorar a acuracidade do LQE \textit{Triangle}, da forma como foi implementado em PhyMAC. O algoritmo original só computa um resultado quando um pacote é recebido com sucesso. Desta forma, no caso de um link com PRR muito baixa, pode demorar para ser atualizado, fornecendo leituras falsamente elevadas. Em PhyMAC, quando um \textit{beacon} de sincronização é recebido o PRR de todos os \textit{links} é atualizado (inclusive dos links através dos quais o \textit{beacon} não foi recebido corretamente), forçando uma atualização da métrica.
 
 Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de seleção de interface utilizado na extremidade transmissora. Basicamente, nesta extremidade, é mantido em cache o conteúdo do último IE recebido através daquele link, caso o \textit{frame} a ser enviado não contenha um IE explicitando quais interfaces devem ser utilizadas, a seleção é feita automaticamente, baseando-se na seleção realizada na extremidade receptora.
 

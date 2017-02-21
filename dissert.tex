@@ -980,7 +980,17 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 % ---
 \chapter{Avaliação experimental} \label{chap_exp}
 
-\begin{figure}[htb]
+A fim de validar experimentalmente as propostas realizadas nos capítulos \ref{phynode} e \ref{phymac} num ambiente real, foi estabelecida uma rede multi-salto composta por sete nodos. Estes nodos foram dispostos em um ambiente residencial a uma distância regular de cerca de quinze metros. Buscou-se dispor os nodos de forma que cada um dos saltos estivesse exposto à um ambiente ligeiramente diferentes dos demais, incluindo espaços abertos, fechados, vegetação densa e por fim um ambiente de alta umidade. Vale ressaltar que não existiam nestes ambientes outras fontes notáveis de interferência além de dois roteadores WiFi operando na banda de 2.4 GHz.
+
+É importante também notar que a performance dos links de comunicação pode ser afetada significativamente por uma série de parâmetros configuráveis, como a seleção do canal utilizado ou a potência de transmissão, além de fatores externos. Para realização dos experimentos em ambiente real o valor destes parâmetros foi escolhido manualmente, de forma a melhor permitir a visualização dos efeitos do ambiente sobre as diferentes interfaces disponíveis. Mais especificamente o canal selecionado para cada uma das interfaces foi escolhido de forma a reduzir a intensidade do ruído de fundo (avaliado através de uma varredura realizada pela própria plataforma de testes), o valor escolhido foi mantido constante para todos os nodos. A potência de transmissão foi reduzida, com o objetivo de permitir que houvesse um certa porcentagem de falhas na troca de pacotes entre os nodos, possibilitando melhor visualização do comportamento dos algoritmos implementados num ambiente real.
+
+Adicionalmente, durante os testes não haviam mecanismos de roteamento implementados nos nodos, por este motivo foi definida uma topologia linear para a rede de testes. Esta estrutura foi previamente fixada através de parâmetros de configuração, que indicavam para cada nodo qual seria o endereço do vizinho com o qual ele deveria se comunicar. As extremidades desta estrutura não se comunicavam entre si, resultando em seis saltos que puderam ser monitorados para obtenção dos resultados experimentais. Durante os testes cada um dos nodos foi equipado com um cartão SD, através do qual arquivos de log puderam ser posteriormente recuperados, permitindo a análise da performance dos links e dos mecanismos de seleção.
+
+Essencialmente foram executadas duas categorias de teste, a primeira delas visava avaliar a validade da utilização da diversidade de interfaces da forma como foi implementada em PhyNode. Ja na segunda categoria de testes foi avaliada a eficiência dos algoritmos de seleção propostos por PhyMac.
+
+Os teste enquadrados na primeira categoria consistiam na transmissão de 5000 \textit{beacons}, a um intervalo fixo de 100ms, utilizando para tal a o método de transmissão mais simples possível: através de todas as interfaces simultaneamente. A escolha da quantidade de pacotes e intervalo de envio também se deu experimentalmente e teve como objetivo fornecer um espaço amostral suficientemente amplo para posterior análise dos dados, minimizando o tempo gasto com cada rodada de testes.
+
+\begin{figure}[tb]
 	\centering
 	\caption{PRR (Transmissão através de todas as interfaces)}
 	\label{fig_prr_no_opt}
@@ -1029,7 +1039,7 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 	\legend{Fonte: Elaboração própria}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 	\centering
 	\caption{Ditribuição da recepção dos pacotes (Sem otimização)}
 	\label{fig_dpr_no_opt}
@@ -1078,9 +1088,13 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 	\legend{Fonte: Elaboração própria}
 \end{figure}
 
-\begin{figure}[htb]
+Os resultados encontram-se ilustrados na \autoref{fig_prr_no_opt} e na \autoref{fig_dpr_no_opt}. Os gráficos presentes na \autoref{fig_prr_no_opt} representam a PRR obtida a paritr de cada uma das interfaces após a conclusão do teste. Há uma coluna adicional (\textit{PhyNode}), a qual contém os valores obtidos através de um contador de PRR implementado após a camada MAC, e representa a PRR que seria percebida por aplicações em execução nas camadas superiores da pilha de protocolos (uma vez que pacotes repetidos são descartados diretamente pela camada MAC). Pode-se observar que o comportamento dos links tende a variar de acordo com o ambiente onde são colocados, no entanto a PRR obtida por PhyNode é constantemente maior do que a obtida através de qualquer uma das interfaces isoladamente, comprovando que a diversidade de interfaces, da forma como foi implementada, tem o potencial para elevar a qualidade dos links de comunicação entre nodos de uma rede de sensores sem fios.
+
+Adicionalmente, os gráficos presentes na \autoref{fig_dpr_no_opt} representam o nível de redundância decorrente do uso simultâneo de todas as interfaces. Cada uma das colunas representa um número de interfaces através das quais determinado pacote foi recebido. Por exemplo um pacote que totalmente perdido contribuiria para o aumento do valor percentual da coluna "0", já um pacote recebido simultaneamente pelas três interfaces iria contribuir para o aumento do percentual representado pela coluna "3". Em condições ideais os resultados da primeira categoria de testes deveriam apresentar 100\% de recepção na coluna "3", porém como houveram perdas de pacotes a distribuição apresentada varia a cada salto.
+
+\begin{figure}[b!]
 	\centering
-	\caption{Métrica \textit{Triangle})}
+	\caption{Métrica \textit{Triangle}}
 	\label{fig_trng_no_opt}
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -1095,7 +1109,7 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 		\captionsetup{width=.9\textwidth}
 		\caption{Salto 2}
 		\label{trng_no_opt_s2}
-	\end{subfigure}
+	\end{subfigure}	
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.98\linewidth]{TRNG_Salto3}
@@ -1110,6 +1124,8 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 		\caption{Salto 4}
 		\label{trng_no_opt_s4}
 	\end{subfigure}
+\end{figure}
+\begin{figure}[ht]\ContinuedFloat		
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.98\linewidth]{TRNG_Salto5}
@@ -1127,7 +1143,9 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 	\legend{Fonte: Elaboração própria}
 \end{figure}
 
-\begin{figure}[htb]
+A segunda categoria de testes foi realizada a partir dos mesmos parâmetros que a primeira, porém deixando a cargo dos algoritmos de PhyMAC a escolha das interfaces de transmissão. Os resultados encontram-se ilustrados na \autoref{fig_trng_no_opt} na \autoref{fig_prr_opt} e na \autoref{fig_dpr_opt}. Representados na \autoref{fig_trng_no_opt} estão os valores computados pelo LQE \textit{Triangle} ao longo da execução dos testes. A variação dos valores iniciais se deveu à movimentação dos nodos para seu posicionamento no início do teste, pode-se observar que os valores se tornam relativamente estáveis após o posicionamento final dos nodos (por volta do milésimo pacote). Também é possível observar que os resultados apresentam variabilidade considerável entre os diferentes saltos, no entanto links de boa qualidade se mantém próximos ao nível 20, enquanto os links de baixa qualidade obtém consistentemente valores abaixo de 10. Estes resultados validam a possibilidade de utilizar fatores de calibração para filtragem dos resultados gerados por \textit{Triangle}.
+
+\begin{figure}[b!]
 	\centering
 	\caption{PRR (Triangle)}
 	\label{fig_prr_opt}
@@ -1159,6 +1177,8 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 		\caption{Salto 4}
 		\label{prr_opt_s4}
 	\end{subfigure}
+\end{figure}
+\begin{figure}[ht]\ContinuedFloat	
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.98\linewidth]{PRR_OPT_Salto5}
@@ -1176,7 +1196,10 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 	\legend{Fonte: Elaboração própria}
 \end{figure}
 
-\begin{figure}[htb]
+Representados nas figuras \ref{fig_prr_opt} e \ref{fig_dpr_opt} estão gráficos semelhantes aos obtidos a partir dos testes da primeira categoria, no entanto os resultados são bastante diferentes. Pode-se observar na \autoref{fig_prr_opt} que o PRR obtido por \textit{PhyNode} utilizando-se PhyMac continua consistentemente alto, porém o PRR das demais interfaces tende a diminuir, indicando que houve redução da quantidade de pacotes redundantes transmitidos durante os testes. Esta anlálise é confirmada pelos gráficos contidos na \autoref{fig_dpr_opt}, que apresentam percentuais consistentemente altos para entregas bem sucedidas através de transmissões realizadas por uma única interface. Há uma exceção no caso da \autoref{dpr_opt_s5}, que apresenta um índice maior de transmissões realizadas simultaneamente através de duas interfaces. Isto se deve ao fato de que todos os links disponíveis no salto 5, durante este teste, apresentaram menor qualidade (como evidenciado na \autoref{dpr_no_opt_s5}), sendo necessário a ativação de múltiplas interfaces de transmissão. No entanto este comportamento se demonstra correto, uma vez que o PRR obtido por \textit{PhyNode} na \autoref{prr_opt_s5} é próximo do ideal, enquanto o PRR de cada uma interfaces utilizadas para transmissão é, isoladamente, inferior.
+
+
+\begin{figure}[b!]
 	\centering
 	\caption{Ditribuição da recepção dos pacotes (Triangle)}
 	\label{fig_dpr_opt}
@@ -1194,6 +1217,8 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 		\caption{Salto 2}
 		\label{dpr_opt_s2}
 	\end{subfigure}
+\end{figure}
+\begin{figure}[t!]\ContinuedFloat		
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.98\linewidth]{DRP_OPT_Salto3}
@@ -1224,10 +1249,6 @@ Finalmente, encontra-se ilustrado na \autoref{fig_phymac_tx} o mecanismo de sele
 	\end{subfigure}
 	\legend{Fonte: Elaboração própria}
 \end{figure}
-
-\begin{center}
-	\textbf{--- Seção em elaboração ---}
-\end{center}
 
 % ----------------------------------------------------------
 % Finaliza a parte no bookmark do PDF

@@ -1261,11 +1261,14 @@ Representados nas figuras \ref{fig_prr_opt} e \ref{fig_dpr_opt} estão gráficos
 % Conclusão
 % ---
 \chapter{Conclusão} \label{chap_concl}
-% TODO - Conclusão
 
-\begin{center}
-	\textbf{--- Seção em elaboração ---}
-\end{center}
+Após avaliação dos resultados experimentais conclui-se que a diversidade de interfaces da forma como foi implementada em PhyNode possui a capacidade de prover links de alta qualidade, atingindo durante os testes resultados próximos do ideal. No entanto o consumo de energia originado pela utilização simultânea de múltiplas interfaces é bastante elevado, podendo não ser inadmissível na maioria dos projetos de redes de sensores sem fios. Adicionalmente pode-se comprovar que a utilização simultânea de múltiplas interfaces de comunicação tende a resultar em grandes quantidades de transmissões redundantes que, se evitadas, poderiam representar reduções expressivas no consumo energético do conjunto de radiotransmissores utilizados. 
+
+PhyMAC demosntrou-se, experimentalmente, capaz de reduzir a quantidade de pacotes redundantes transmitidos na rede, sem causar redução significativa da qualidade dos links disponibilizados por PhyNode. Sendo assim é possível afirmar que o conjunto de propostas a partir das quais foram elaborados PhyNode e PhyMAC consiste numa solução válida para a obtenção de links de comunicação de melhor qualidade, sem grandes \textit{overheads} energéticos.
+
+Também é necessário considerar que a complexidade e o custo associados à produção de um nodo baseado na arquitetura PhyNode podem ser significativamente superiores àqueles associados com a produção de um nodo convencional, que não utilize técnicas de diversidade de interfaces. No entanto PhyNode, se utilizado em conjunto com PhyMAC pode permitir a implantação de redes menos densas e mais robustas podendo, em alguns casos, ser uma solução mais vantajosa.
+
+Adicionalmente, em teoria, o conjunto de \textit{hardware} e \textit{software} que compõe os nodos baseados em PhyNode e PhyMAC provê suporte à utilização de diversos protocolos de alto nível como ZigBee, 6LoWPAN e outros implementados a partir do padrão IEEE 802.15.4, abrindo caminho para a implementação de diversas outras camadas de software destinadas à interoperabilidade de dispositivos. Pode-se considerar a possibilidade de implementações capazes de integrar-se simultaneamente à redes baseadas em diferentes tecnologias e/ou protocolos, ou ainda de utilizar o conjunto PhyNode e PhyMAC para implementação de redes heterogêneas, formadas por diferentes tipos de nodos, cada qual operando através de uma tecnologia.
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
